@@ -70,7 +70,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:alpha="0.75"
         android:layout_below="@+id/joinnowpassword"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_alignEnd="@+id/joinnowpassword"
         android:layout_alignStart="@+id/joinnowpassword" />
 
