@@ -2,7 +2,7 @@
 
 Team Members
 Kathy Liang	
-Jenny Chen						
-Nicholas Osborne Hardison-Moschopoulos		
-Tae Min (Thomas) Kim					
+Jenny Chen
+Nicholas Osborne Hardison-Moschopoulos
+Tae Min (Thomas) Kim
 Vishal Goel						
