@@ -1,6 +1,6 @@
 # Tulyp 
 
-Team Members    
+## Team Members    
 Kathy Liang	  
 Jenny Chen    
 Nicholas Osborne Hardison-Moschopoulos    
