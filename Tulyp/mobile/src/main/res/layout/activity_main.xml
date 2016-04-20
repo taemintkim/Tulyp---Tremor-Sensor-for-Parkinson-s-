@@ -22,15 +22,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:text="for Parkinson&apos;s Disease"
-        android:textAlignment="center"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -68,17 +59,26 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Tulyp"
-        android:id="@+id/textView2"
-        android:layout_above="@+id/textView"
+        android:id="@+id/tulyp"
+        android:layout_above="@+id/forpd"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forpd"
+        android:text="for Parkinson&apos;s Disease"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tremor tracking with Android Wear."
-        android:id="@+id/textView3"
+        android:id="@+id/description"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/forpd"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

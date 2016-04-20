@@ -26,7 +26,9 @@
         </service>
 
         <activity android:name=".SignIn" />
-        <activity android:name=".JoinNow"></activity>
+        <activity android:name=".JoinNow" />
+        <activity android:name=".CompleteProfile" />
+        <activity android:name=".DoctorQuestion"></activity>
     </application>
 
 </manifest>
