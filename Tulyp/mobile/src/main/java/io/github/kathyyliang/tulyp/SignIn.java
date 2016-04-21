@@ -18,7 +18,9 @@ public class SignIn extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // currently defaults to patient view, later we have to check if doctor
+                Intent intent = new Intent(getBaseContext(), PatientView.class);
+                startActivity(intent);
             }
         });
     }

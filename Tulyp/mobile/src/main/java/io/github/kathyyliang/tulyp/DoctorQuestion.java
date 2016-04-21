@@ -15,6 +15,13 @@ public class DoctorQuestion extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_question);
 
         Button yesButton = (Button) findViewById(R.id.yesbutton);
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), DoctorView.class);
+                startActivity(intent);
+            }
+        });
 
         Button noButton = (Button) findViewById(R.id.nobutton);
         noButton.setOnClickListener(new View.OnClickListener() {

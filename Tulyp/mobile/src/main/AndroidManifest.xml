@@ -30,7 +30,13 @@
         <activity android:name=".CompleteProfile" />
         <activity android:name=".DoctorQuestion" />
         <activity android:name=".PatientView" />
-        <activity android:name=".DoctorView"></activity>
+        <activity android:name=".DoctorView" />
+        <activity android:name=".PatientSettings" />
+        <activity android:name=".DoctorSettings" />
+        <activity android:name=".AddPatient" />
+        <activity android:name=".MedicalProfile" />
+        <activity android:name=".AccountInfo" />
+        <activity android:name=".Medication"></activity>
     </application>
 
 </manifest>

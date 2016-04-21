@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">Tulyp</string>
+
+    <string-array name="patient_settings">
+        <item>Medical Profile</item>
+        <item>Medication</item>
+        <item>Account</item>
+        <item>About</item>
+        <item>Help</item>
+        <item>Log Out</item>
+    </string-array>
+
+    <string-array name="doctor_settings">
+        <item>Account</item>
+        <item>About</item>
+        <item>Help</item>
+        <item>Log Out</item>
+    </string-array>
+
+    <string-array name="joanna_profile">
+        <item>Joanna Hansen</item>
+        <item>Gender</item>
+        <item>Date of Birth</item>
+        <item>Height</item>
+        <item>Weight</item>
+        <item>Medication</item>
+    </string-array>
+
+    <string-array name="account_info">
+        <item>Email</item>
+        <item>Phone</item>
+        <item>Password</item>
+    </string-array>
+
+    <string-array name="medication">
+        <item>Sinemet</item>
+        <item>Take 2 tablets by mouth daily</item>
+        <item>Warnings: may cause dizziness</item>
+        <item>First day of use: 01/01/2016</item>
+    </string-array>
 </resources>
