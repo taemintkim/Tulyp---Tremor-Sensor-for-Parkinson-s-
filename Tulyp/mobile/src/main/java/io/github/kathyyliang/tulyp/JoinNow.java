@@ -7,6 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
+import java.util.Map;
+
 public class JoinNow extends AppCompatActivity {
 
     @Override
@@ -23,4 +28,6 @@ public class JoinNow extends AppCompatActivity {
             }
         });
     }
+
+
 }
