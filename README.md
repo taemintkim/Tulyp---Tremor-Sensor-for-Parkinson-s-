@@ -1,2 +1,8 @@
-# Group-38-Project
-Group 38 Project
+# Tulyp 
+
+### Team Members    
+Kathy Liang	  
+Jenny Chen    
+Nicholas Osborne Hardison-Moschopoulos    
+Tae Min (Thomas) Kim    
+Vishal Goel						

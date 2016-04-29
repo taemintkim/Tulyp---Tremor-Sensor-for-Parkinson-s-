@@ -38,4 +38,5 @@
         <item>Warnings: may cause dizziness</item>
         <item>First day of use: 01/01/2016</item>
     </string-array>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
