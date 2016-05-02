@@ -122,4 +122,8 @@ public class MyFirebase {
     public String getUID() {
         return uid;
     }
+
+    public void sendData() {
+
+    }
 }
