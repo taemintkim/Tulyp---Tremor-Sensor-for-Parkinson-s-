@@ -35,14 +35,22 @@ public class MainActivity extends Activity implements SensorEventListener {
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
-        /*FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        CardFragment cardFragment = CardFragment.create("Tulyp",
-                "is now running in the background.");
-        fragmentTransaction.add(R.id.frame_layout, cardFragment);
-        fragmentTransaction.commit();*/
+        WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+            @Override public void onLayoutInflated(WatchViewStub stub) {
+                // Now you can access your views
+                //TextView tv = (TextView) stub.findViewById(R.id.text);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                CardFragment cardFragment = CardFragment.create("Tulyp",
+                        "is now running in the background.", R.drawable.redtulipsmall);
+                fragmentTransaction.add(R.id.frame_layout, cardFragment);
+                fragmentTransaction.commit();
+            }
+        });
 
-        int notificationId = 001;
+
+        /*int notificationId = 001;
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this)
@@ -50,15 +58,15 @@ public class MainActivity extends Activity implements SensorEventListener {
                         .setContentTitle("Tulyp")
                         .setContentText("is now running in the background.");
 
-        /*// Get an instance of the NotificationManager service
+        // Get an instance of the NotificationManager service
         NotificationManagerCompat notificationManager =
                 NotificationManagerCompat.from(this);
 
         // Build the notification and issues it with notification manager.
-        notificationManager.notify(notificationId, notificationBuilder.build());*/
+        notificationManager.notify(notificationId, notificationBuilder.build());
 
         ((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
-                .notify(notificationId, notificationBuilder.build());
+                .notify(notificationId, notificationBuilder.build());*/
 
     }
 
