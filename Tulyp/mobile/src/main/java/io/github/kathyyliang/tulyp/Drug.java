@@ -10,6 +10,23 @@ public class Drug {
     private String instructions;
     private String warnings;
     private String start_date;
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public String getWarnings() {
+        return warnings;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
     private String end_date;
     public Drug(){}
     public Drug(String inst, String warnings, String start_date, String end_date) {
@@ -18,4 +35,6 @@ public class Drug {
         this.start_date = start_date;
         this.end_date = end_date;
     }
+
+
 }
