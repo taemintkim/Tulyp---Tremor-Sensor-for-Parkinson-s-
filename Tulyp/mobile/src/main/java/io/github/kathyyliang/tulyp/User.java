@@ -5,13 +5,15 @@ import android.util.Log;
 
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by TK on 5/1/16.
  */
 public class User {
-    private int birthdate;
+    private String birthdate;
     private String name;
     private String email;
     private Bitmap profilepic;
@@ -22,7 +24,8 @@ public class User {
     private String height;
     private HashMap<String, Drug> medications;
     private String tremordata;
-    private HashMap<String, User> patients;
+    private ArrayList<User> patients;
+    private ArrayList<String> patientIDs;
 
 
     public User() {}
@@ -31,7 +34,7 @@ public class User {
         this.email = email;
     }
 
-    public void setPatients(HashMap<String, User> pats) {
+    public void setPatients(ArrayList<User> pats) {
         if (isDoctor) {
             patients = pats;
         } else {
@@ -39,11 +42,16 @@ public class User {
         }
     }
 
-    public HashMap<String, User> getPatients() {
-        return patients;
+    public ArrayList<String> getPatientIDs() {
+        return patientIDs;
     }
 
-    public User(String fullName, int birthdate, String email) {
+    public void addPatientID(String id) {
+        patientIDs.add(id);
+    }
+
+
+    public User(String fullName, String birthdate, String email) {
         this.name = fullName;
         this.birthdate = birthdate;
         this.email = email;
@@ -64,7 +72,7 @@ public class User {
     public String getPhoneNumber() {
         return phonenumber;
     }
-    public void setBirthdate(int birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -107,7 +115,7 @@ public class User {
     public boolean isDoctor() {
         return isDoctor;
     }
-    public int getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
@@ -135,25 +143,7 @@ public class User {
         return medications;
     }
 
-    public String getTremordata() {
-        return tremordata;
-    }
-
-
-    /**
-     * Data structure to store medication information.
-     */
-    public class Drug {
-        private String instructions;
-        private String warnings;
-        private String start_date;
-        private String end_date;
-        public Drug(){}
-        public Drug(String inst, String warnings, String start_date, String end_date) {
-            this.instructions = inst;
-            this.warnings = warnings;
-            this.start_date = start_date;
-            this.end_date = end_date;
-        }
-    }
+//    public String getTremordata() {
+//        return tremordata;
+//    }
 }

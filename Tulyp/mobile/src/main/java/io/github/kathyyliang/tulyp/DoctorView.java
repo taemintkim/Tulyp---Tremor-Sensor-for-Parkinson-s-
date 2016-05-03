@@ -7,17 +7,36 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DoctorView extends AppCompatActivity {
+    MyFirebase mfirebase = TulypApplication.mFirebase;
+    User mUser = TulypApplication.mUser;
+    ArrayList<User> patients = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_view);
+
+        // check if we have data.
+        if (mUser == null) {
+            //todo load user data from online
+            Log.d("DoctorView", "No User data loaded.");
+        }
+        ArrayList<String> patientIDs = mUser.getPatientIDs();
+        fetchPatientsData(patientIDs);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Patients");
@@ -31,6 +50,26 @@ public class DoctorView extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * THIS IS ASYNCHRONOUS meaning you don't know when and the order this method will finish getting patient data.
+     * @param uids
+     */
+    public void fetchPatientsData(ArrayList<String> uids) {
+        for (String id : uids) {
+            mfirebase.getFirebaseRef().child("Users").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    patients.add(snapshot.getValue(User.class));
+                    //todo: update View to show patient information
+                }
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+                    Log.d("DoctorView", "Failed to retrieve User data\n" + firebaseError);
+                }
+            });
+        }
     }
 
     @Override
