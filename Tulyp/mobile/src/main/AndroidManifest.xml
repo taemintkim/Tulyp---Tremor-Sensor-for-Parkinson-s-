@@ -34,7 +34,7 @@
         <activity android:name=".MedicalProfile" />
         <activity android:name=".AccountInfo" />
         <activity android:name=".Medication" />
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".TestActivity" />
 
         <service android:name=".PhoneToWatchService" />
         <service
@@ -45,7 +45,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".DoctorPatientView"></activity>
+        <activity android:name=".DoctorPatientView" />
+        <activity android:name=".DoctorMedication"></activity>
     </application>
 
 </manifest>
