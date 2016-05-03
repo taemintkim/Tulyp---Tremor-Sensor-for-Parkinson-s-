@@ -14,8 +14,8 @@ public class TulypApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Firebase.getDefaultConfig().setPersistenceEnabled(true);
         Firebase.setAndroidContext(this);
         mFirebase = new MyFirebase();
-        Firebase.getDefaultConfig().setPersistenceEnabled(true);
     }
 }
