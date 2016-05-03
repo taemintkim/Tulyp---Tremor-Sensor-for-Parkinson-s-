@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/accountinfo"
         android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/account_info" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

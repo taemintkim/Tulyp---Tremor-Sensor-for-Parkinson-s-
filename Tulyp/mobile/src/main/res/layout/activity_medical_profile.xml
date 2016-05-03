@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/medicalprofile"
         android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/joanna_profile" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
