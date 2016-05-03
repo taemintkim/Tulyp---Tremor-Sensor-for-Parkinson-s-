@@ -18,6 +18,7 @@ public class DoctorQuestion extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TulypApplication.mUser.setIsDoctor(true);
                 Intent intent = new Intent(getBaseContext(), DoctorView.class);
                 startActivity(intent);
             }
@@ -27,6 +28,7 @@ public class DoctorQuestion extends AppCompatActivity {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TulypApplication.mUser.setIsDoctor(false);
                 Intent intent = new Intent(getBaseContext(), CompleteProfile.class);
                 startActivity(intent);
             }

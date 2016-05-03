@@ -1,6 +1,7 @@
 package io.github.kathyyliang.tulyp;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.firebase.client.Firebase;
 
@@ -21,9 +22,26 @@ public class User {
     private String height;
     private HashMap<String, Drug> medications;
     private String tremordata;
+    private HashMap<String, User> patients;
 
 
     public User() {}
+
+    public User(String email) {
+        this.email = email;
+    }
+
+    public void setPatients(HashMap<String, User> pats) {
+        if (isDoctor) {
+            patients = pats;
+        } else {
+            Log.d("User", "Trying to add patients to a non-Doctor");
+        }
+    }
+
+    public HashMap<String, User> getPatients() {
+        return patients;
+    }
 
     public User(String fullName, int birthdate, String email) {
         this.name = fullName;

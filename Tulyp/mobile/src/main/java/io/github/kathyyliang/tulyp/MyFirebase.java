@@ -31,38 +31,47 @@ public class MyFirebase {
         mfirebase = new Firebase("https://tulyp.firebaseio.com");
     }
 
-    public void createUser(String email, String password) {
+    public void createUser(final String email, final String password) {
         mfirebase.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
             @Override
             public void onSuccess(Map<String, Object> result) {
-                System.out.println("Successfully created user account with uid: " + result.get("uid"));
+                Log.d("Firebase", "Create User successful!");
+                TulypApplication.mUser = new User(email);
+                Log.d("firebase", "done with setting user");
+                login(email, password);
             }
 
             @Override
             public void onError(FirebaseError firebaseError) {
                 // there was an error
+                Log.d("Firebase", "Create User unsuccessful. >:(\n" + firebaseError);
             }
         });
     }
 
+    public Firebase getFirebaseRef() {
+        return mfirebase;
+    }
+
     /**
-     * Using email and password, authenticate to Firebase.
+     * Using email and password, authenticate to Firebase. If login is successful, fetch user data.
      *
      * @param email:    String email from user input.
      * @param password: String password from user input.
      */
-    public void login(String email, String password, final Context context) {
+    public void login(String email, String password) {
         //todo this Firebase instance will have to be moved to a global application context class so other activities can use it.
         mfirebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
+                Log.d("Firebase", "Login successful!");
                 uid = authData.getUid();
                 mfirebase.child("Users").child(uid).keepSynced(true); //keep local data synced even when offline.
-                System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
-                CharSequence text = "Login Successful!";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration); //not sure if this way of passing in context is correct.
-                toast.show();
+//                System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
+//                CharSequence text = "Login Successful!";
+//                int duration = Toast.LENGTH_SHORT;
+//                Toast toast = Toast.makeText(context, text, duration); //not sure if this way of passing in context is correct.
+//                toast.show();
             }
 
             @Override
@@ -71,16 +80,16 @@ public class MyFirebase {
                 switch (error.getCode()) {
                     case FirebaseError.USER_DOES_NOT_EXIST:
                         // todo handle a non existing user. Show alert dialog? This is up to Frontend
-                        new AlertDialog.Builder(context)
-                                .setMessage("Woops! An account under this email does not exist.\nCheck your email address or sign up to Tulyp.")
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .show();
-                        break;
+//                        new AlertDialog.Builder()
+//                                .setMessage("Woops! An account under this email does not exist.\nCheck your email address or sign up to Tulyp.")
+//                                .setIcon(android.R.drawable.ic_dialog_alert)
+//                                .show();
+//                        break;
                     case FirebaseError.INVALID_PASSWORD:
                         // handle an invalid password
                         CharSequence text = "Incorrect password";
                         int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
+                        Toast toast = Toast.makeText(TulypApplication.getAppContext(), text, duration);
                         toast.show();
                         break;
                     default:
@@ -100,6 +109,7 @@ public class MyFirebase {
             public void onAuthStateChanged(AuthData authData) {
                 if (authData != null) {
                     // user is logged in
+                    fetchUserData();
                 } else {
                     // user is not logged in
                     //TODO: kick off user and go back to sign in activity
@@ -135,14 +145,23 @@ public class MyFirebase {
         return uid;
     }
 
+    public void setUID(String uid) {
+        this.uid = uid;
+    }
+
     /**
      * Stores user data to Firebase.
      * Warning: This will overwrite and potentially delete data!
      * @param user: a User class with user information
      */
     public void setNewUserInfo(User user) {
-        Firebase userRef = mfirebase.child("Users").child(uid);
-        userRef.setValue(user);
+        if (user == null) {
+            Log.d("Firebase", "Trying to set a null user");
+        }
+        if (uid != null) {
+            Firebase userRef = mfirebase.child("Users").child(uid);
+            userRef.setValue(user);
+        }
     }
 
     /**
@@ -168,7 +187,7 @@ public class MyFirebase {
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-                Log.d("Firebase", "Failed to retrieve User data");
+                Log.d("Firebase", "Failed to retrieve User data\n" + firebaseError);
             }
         });
     }
