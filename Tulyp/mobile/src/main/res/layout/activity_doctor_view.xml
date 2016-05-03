@@ -20,24 +20,6 @@
         android:id="@+id/searchView"
         android:layout_below="@+id/toolbar" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tempmedicalprofile"
-        android:layout_below="@+id/searchView"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/patientlist"
-        android:background="@android:color/white" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tempmoredata"
-        android:src="@drawable/patientlist"
-        android:background="@android:color/white"
-        android:layout_below="@+id/tempmedicalprofile"
-        android:layout_centerHorizontal="true" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -46,5 +28,12 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="5dp"
         android:src="@drawable/ic_add_white_24dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/patientList"
+        android:layout_below="@+id/searchView"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

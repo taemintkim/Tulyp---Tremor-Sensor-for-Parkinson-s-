@@ -31,24 +31,6 @@ public class DoctorView extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        ImageButton tempMedicalProfile = (ImageButton) findViewById(R.id.tempmedicalprofile);
-        tempMedicalProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MedicalProfile.class);
-                startActivity(intent);
-            }
-        });
-
-        ImageButton tempMoreInfo = (ImageButton) findViewById(R.id.tempmoredata);
-        tempMoreInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), PatientView.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override

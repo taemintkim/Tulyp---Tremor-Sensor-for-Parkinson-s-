@@ -42,17 +42,22 @@ public class PageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_page, container, false);
-        ImageView graphKey = (ImageView) view.findViewById(R.id.graphkey);
-        ImageView graph = (ImageView) view.findViewById(R.id.graph);
-        TextView text = (TextView) view.findViewById(R.id.scale);
         if (mPage == 1) {
-            graphKey.setImageResource(R.drawable.daykey);
-            graph.setImageResource(R.drawable.daygraph);
-            text.setText("Time (hours)");
+
+            // day
+
+        } else if (mPage == 2) {
+
+            // week
+
+        } else if (mPage == 3) {
+
+            // month
+
         } else if (mPage == 4) {
-            graphKey.setImageResource(R.drawable.yearkey);
-            graph.setImageResource(R.drawable.yeargraph);
-            text.setText("Month");
+
+            // year
+
         }
         return view;
     }

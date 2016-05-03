@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".SignIn" />
         <activity android:name=".JoinNow" />
         <activity android:name=".CompleteProfile" />
@@ -31,16 +32,19 @@
         <activity android:name=".AddPatient" />
         <activity android:name=".MedicalProfile" />
         <activity android:name=".AccountInfo" />
-        <activity android:name=".Medication"/>
-        <activity android:name=".TestActivity">
-        </activity>
+        <activity android:name=".Medication" />
+        <activity android:name=".TestActivity"></activity>
 
         <service android:name=".PhoneToWatchService" />
-        <service android:name=".PhoneListenerService" android:label="@string/app_name">
+        <service
+            android:name=".PhoneListenerService"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
             </intent-filter>
         </service>
+
+        <activity android:name=".DoctorPatientView"></activity>
     </application>
 
 </manifest>
