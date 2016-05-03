@@ -1,13 +1,22 @@
 package io.github.kathyyliang.tulyp;
 
 import android.app.AlertDialog;
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
+import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.firebase.client.AuthData;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,6 +37,7 @@ public class MyFirebase {
             public void onSuccess(Map<String, Object> result) {
                 System.out.println("Successfully created user account with uid: " + result.get("uid"));
             }
+
             @Override
             public void onError(FirebaseError firebaseError) {
                 // there was an error
@@ -37,7 +47,8 @@ public class MyFirebase {
 
     /**
      * Using email and password, authenticate to Firebase.
-     * @param email: String email from user input.
+     *
+     * @param email:    String email from user input.
      * @param password: String password from user input.
      */
     public void login(String email, String password, final Context context) {
@@ -46,6 +57,7 @@ public class MyFirebase {
             @Override
             public void onAuthenticated(AuthData authData) {
                 uid = authData.getUid();
+                mfirebase.child("Users").child(uid).keepSynced(true); //keep local data synced even when offline.
                 System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
                 CharSequence text = "Login Successful!";
                 int duration = Toast.LENGTH_SHORT;
@@ -123,7 +135,42 @@ public class MyFirebase {
         return uid;
     }
 
-    public void sendData() {
-
+    /**
+     * Stores user data to Firebase.
+     * Warning: This will overwrite and potentially delete data!
+     * @param user: a User class with user information
+     */
+    public void setNewUserInfo(User user) {
+        Firebase userRef = mfirebase.child("Users").child(uid);
+        userRef.setValue(user);
     }
+
+    /**
+     * Adds info to current authenticated User's database.
+     *
+     * @param info a Map with each entry containing information title as key and user specific information as value.
+     *             You can put multiple entries in the map.
+     *             ex. "name" as key; "McDonald" as value.
+     */
+    public void addUserInfo(HashMap<String, Object> info) {
+        Firebase userRef = mfirebase.child("Users").child(uid);
+        userRef.updateChildren(info);
+    }
+
+    /**
+     * fetches the currently authenticated user's profile data.
+     */
+    public void fetchUserData() {
+        mfirebase.child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TulypApplication.mUser = snapshot.getValue(User.class);
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d("Firebase", "Failed to retrieve User data");
+            }
+        });
+    }
+
 }

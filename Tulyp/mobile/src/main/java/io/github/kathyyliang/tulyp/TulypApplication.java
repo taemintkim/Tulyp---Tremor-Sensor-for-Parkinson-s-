@@ -9,10 +9,13 @@ import com.firebase.client.Firebase;
  */
 public class TulypApplication extends Application {
     public static MyFirebase mFirebase;
+    public static User mUser;
+
     @Override
     public void onCreate() {
         super.onCreate();
         Firebase.setAndroidContext(this);
         mFirebase = new MyFirebase();
+        Firebase.getDefaultConfig().setPersistenceEnabled(true);
     }
 }
