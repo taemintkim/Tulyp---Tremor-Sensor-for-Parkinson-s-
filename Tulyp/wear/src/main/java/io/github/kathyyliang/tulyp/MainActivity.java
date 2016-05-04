@@ -18,22 +18,15 @@ import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.WatchViewStub;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements SensorEventListener {
-
-    private SensorManager senSensorManager;
-    private Sensor senAccelerometer;
-    private long lastUpdate = 0;
-    private float last_x, last_y, last_z;
-    private static final int SHAKE_THRESHOLD = 200;
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        Intent intent = new Intent(getBaseContext(), SensorService.class);
+        startService(intent);
 
         WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
@@ -48,7 +41,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                 fragmentTransaction.commit();
             }
         });
-
 
         /*int notificationId = 001;
 
@@ -71,56 +63,14 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
 
     @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-        Sensor mySensor = sensorEvent.sensor;
-        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
-
-            long curTime = System.currentTimeMillis();
-
-            if ((curTime - lastUpdate) > 100) {
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
-
-                float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
-
-                if (speed > SHAKE_THRESHOLD) {
-                    Bundle b = new Bundle();
-                    b.putLong("time", curTime);
-                    b.putFloat("speed", speed);
-                    b.putLong("diffTime", diffTime);
-
-                    Bundle toSend = new Bundle();
-                    toSend.putBundle(WatchToPhoneService.MESSAGE_KEY, b);
-
-                    Intent intent = new Intent(getBaseContext(), WatchToPhoneService.class);
-                    intent.putExtras(toSend);
-                    startService(intent);
-                }
-
-                last_x = x;
-                last_y = y;
-                last_z = z;
-            }
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
-        senSensorManager.unregisterListener(this);
+        //senSensorManager.unregisterListener(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        //senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
