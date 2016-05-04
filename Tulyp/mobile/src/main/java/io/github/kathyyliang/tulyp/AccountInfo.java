@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,13 @@ public class AccountInfo extends AppCompatActivity {
                 EditText oldp = (EditText) findViewById(R.id.currentpassword);
                 EditText newp = (EditText) findViewById(R.id.newpassword);
                 EditText newp2 = (EditText) findViewById(R.id.confirmnewpassword);
-                changepassword(TulypApplication.mUser.getEmail(), newp.getText().toString(), newp2.getText().toString());
+                if (!newp.getText().toString().equals(newp2.getText().toString())) {
+                    CharSequence text = "Error: New passwords do not match.";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(context, text, duration); //not sure if this way of passing in context is correct.
+                    toast.show();
+                }
+                changepassword(TulypApplication.mUser.getEmail(), oldp.getText().toString(), newp.getText().toString());
             }
         });
     }
@@ -56,6 +63,7 @@ public class AccountInfo extends AppCompatActivity {
             @Override
             public void onError(FirebaseError firebaseError) {
                 // error encountered
+                Log.d("AccountInfo", "could not change pw: " + firebaseError);
                 CharSequence text = "Error: Try again.";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration); //not sure if this way of passing in context is correct.

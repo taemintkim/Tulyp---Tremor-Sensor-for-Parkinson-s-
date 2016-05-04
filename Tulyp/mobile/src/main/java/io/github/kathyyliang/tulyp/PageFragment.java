@@ -26,7 +26,9 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 
 /**
@@ -38,6 +40,10 @@ public class PageFragment extends Fragment {
     private float[] todaysYData;
 
     public static final String ARG_PAGE = "ARG_PAGE";
+    XAxis xAxis;
+    YAxis yAxis;
+    LineChart chart;
+    TextView label;
 
     private int mPage;
 
@@ -64,22 +70,22 @@ public class PageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_page, container, false);
-        LineChart chart = (LineChart) view.findViewById(R.id.chart);
-        TextView label = (TextView) view.findViewById(R.id.xaxislabel);
-        XAxis xAxis = chart.getXAxis();
-        YAxis yAxis = chart.getAxisLeft();
+        chart = (LineChart) view.findViewById(R.id.chart);
+        label = (TextView) view.findViewById(R.id.xaxislabel);
+        xAxis = chart.getXAxis();
+        yAxis = chart.getAxisLeft();
         chart.getAxisRight().setEnabled(false);
         if (mPage == 1) {
             pullSensorData(myFirebase.getUID()); //getting today's data.
-            LineData data = getData(24, 600);
-            chart.setData(data);
-            xAxis.setLabelsToSkip(1);
-            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-            xAxis.setDrawGridLines(false);
-            yAxis.setDrawGridLines(false);
-            chart.setDescription("");
-            chart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
-            label.setText("Time (Hours)");
+//            LineData data = getData(24, 600);
+//            chart.setData(data);
+//            xAxis.setLabelsToSkip(1);
+//            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+//            xAxis.setDrawGridLines(false);
+//            yAxis.setDrawGridLines(false);
+//            chart.setDescription("");
+//            chart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
+//            label.setText("Time (Hours)");
             // day
 
         } else if (mPage == 2) {
@@ -186,12 +192,30 @@ public class PageFragment extends Fragment {
                 if (todaysYData == null) {
                     todaysYData = new float[24];
                 }
+                LineData data1 = getData(24, 600);
+                chart.setData(data1);
+                xAxis.setLabelsToSkip(1);
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setDrawGridLines(false);
+                yAxis.setDrawGridLines(false);
+                chart.setDescription("");
+                chart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
+                label.setText("Time (Hours)");
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 Log.d("Firebase", "Failed to retrieve sensor data\n" + firebaseError);
             }
         });
+    }
+
+    private int getCurrentHour() {
+        long curTime = System.currentTimeMillis();
+        Calendar curDate = Calendar.getInstance();
+        curDate.setTimeInMillis(curTime);
+        Locale locale = Locale.getDefault();
+        Integer hourint = curDate.get(Calendar.HOUR_OF_DAY) - 3;
+        return hourint;
     }
 
 }
