@@ -23,8 +23,9 @@ public class MedicalProfileAdapter extends BaseAdapter {
     protected String[] headings;
     Context context;
     protected String age;
+    protected String patientID;
 
-    public MedicalProfileAdapter(Context context, String[] headings, ArrayList<String> height, String weight, String age, String gender, String contact,String medication ){
+    public MedicalProfileAdapter(Context context, String[] headings, ArrayList<String> height, String weight, String age, String gender, String contact,String medication, String patientID ){
         this.headings = headings;
         this.context = context;
         this.height = height;
@@ -33,6 +34,7 @@ public class MedicalProfileAdapter extends BaseAdapter {
         this.contact = contact;
         this.medication = medication;
         this.age = age;
+        this.patientID = patientID;
 
     }
 
@@ -87,7 +89,7 @@ public class MedicalProfileAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     Intent detail = new Intent(context, DoctorMedication.class);
-
+                    detail.putExtra("patientID", patientID);
                     context.startActivity(detail);
                 }
             });

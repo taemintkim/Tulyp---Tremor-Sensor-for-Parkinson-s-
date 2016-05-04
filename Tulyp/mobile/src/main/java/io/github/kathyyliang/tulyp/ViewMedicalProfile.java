@@ -55,7 +55,7 @@ public class ViewMedicalProfile extends AppCompatActivity {
 
 
         patientList = (android.widget.ListView) findViewById(R.id.medicalprofile);
-        adapter = new MedicalProfileAdapter(this, headings, height, weight, age, gender, contact, medication);
+        adapter = new MedicalProfileAdapter(this, headings, height, weight, age, gender, contact, medication, patientID);
         patientList.setAdapter(adapter);
 
 //=======

@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class DoctorPatientView extends AppCompatActivity {
     private double[] todaysYData;
     private MyFirebase myFirebase = TulypApplication.mFirebase;
+    private String patientID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

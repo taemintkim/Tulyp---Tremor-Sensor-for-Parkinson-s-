@@ -73,6 +73,7 @@ public class DoctorView extends AppCompatActivity {
      * @param uids
      */
     public void fetchPatientsData(ArrayList<String> uids) {
+        patientIDs = uids;
         if (uids == null) { //this doctor has no patients.
             return;
         }
@@ -88,6 +89,7 @@ public class DoctorView extends AppCompatActivity {
                         gender.add(u.getGender());
                         contact.add(u.getEmail());
                         weight.add(u.getWeight());
+
 
 //                        medication.add((String) u.getMedications().keySet().toArray()[0]);
                         Set meds = u.getMedications().keySet();

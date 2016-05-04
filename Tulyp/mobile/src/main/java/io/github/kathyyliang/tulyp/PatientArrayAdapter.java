@@ -86,6 +86,7 @@ public class PatientArrayAdapter extends BaseAdapter {
                 detail.putExtra("height", height.get(position));
                 detail.putExtra("weight", weight.get(position));
                 detail.putExtra("contact", contact.get(position));
+                detail.putExtra("patientID", patientID.get(position));
                 context.startActivity(detail);
 
 
