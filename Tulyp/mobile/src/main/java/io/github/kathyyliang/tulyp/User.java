@@ -22,7 +22,7 @@ public class User {
     private Bitmap profilepic;
     private String phonenumber;
     private boolean isDoctor;
-    private int gender;
+    private int gender = 2;
     private String weight;
     private ArrayList<String> height;
     private HashMap<String, Drug> medications;
