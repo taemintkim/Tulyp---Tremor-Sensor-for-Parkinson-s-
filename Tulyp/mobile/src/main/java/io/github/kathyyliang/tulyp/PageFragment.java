@@ -4,12 +4,17 @@ package io.github.kathyyliang.tulyp;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
@@ -21,12 +26,16 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class PageFragment extends Fragment {
+
+    private MyFirebase myFirebase = TulypApplication.mFirebase;
+    private float[] todaysYData;
 
     public static final String ARG_PAGE = "ARG_PAGE";
 
@@ -61,6 +70,7 @@ public class PageFragment extends Fragment {
         YAxis yAxis = chart.getAxisLeft();
         chart.getAxisRight().setEnabled(false);
         if (mPage == 1) {
+            pullSensorData(myFirebase.getUID()); //getting today's data.
             LineData data = getData(24, 600);
             chart.setData(data);
             xAxis.setLabelsToSkip(1);
@@ -120,9 +130,12 @@ public class PageFragment extends Fragment {
 
         ArrayList<String> xVals = new ArrayList<String>();
         ArrayList<Entry> yVals = new ArrayList<Entry>();
-        int[] arr = {200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320,
+        float[] arr = {200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320,
                 200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320,
                 200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320};
+        if (count == 24) {
+            arr = todaysYData;
+        }
         for (int i = 0; i < count; i++) {
             xVals.add(Integer.toString(i + 1));
             yVals.add(new Entry(arr[i], i));
@@ -148,6 +161,37 @@ public class PageFragment extends Fragment {
         LineData data = new LineData(xVals, dataSets);
 
         return data;
+    }
+
+    /**
+     * Fills in todaysYData with the averaged data points for today's tremor sensor data.
+     * todaysYData should be size 24 with index corresponding to hour of the day.
+     * @param uid of the user whose data we fetch
+     */
+    private void pullSensorData(String uid) {
+        todaysYData = new float[24];
+        Firebase mfirebase = myFirebase.getFirebaseRef();
+        Firebase userRef = mfirebase.child("SensorData").child(uid);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                HashMap<String, Object> data = (HashMap<String, Object>) snapshot.getValue();
+                if (data == null) {
+                    Log.d("Firebase", "No Sensor data for this user");
+                    todaysYData = new float[24];
+                    return;
+                }
+                TulypApplication.setTremordata(data);
+                todaysYData = MyFirebase.makeDayDataPoints(data);
+                if (todaysYData == null) {
+                    todaysYData = new float[24];
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d("Firebase", "Failed to retrieve sensor data\n" + firebaseError);
+            }
+        });
     }
 
 }

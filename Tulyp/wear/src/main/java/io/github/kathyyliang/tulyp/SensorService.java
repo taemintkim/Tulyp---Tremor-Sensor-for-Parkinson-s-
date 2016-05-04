@@ -35,7 +35,6 @@ public class SensorService extends Service implements SensorEventListener {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         return null;
     }
 
