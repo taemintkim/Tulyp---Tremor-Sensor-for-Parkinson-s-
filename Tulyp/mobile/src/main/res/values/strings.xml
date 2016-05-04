@@ -9,6 +9,7 @@
 
     <string-array name="patient_settings">
         <item>Medical Profile</item>
+        <item>Medication</item>
         <item>Account</item>
         <item>About</item>
         <item>Help</item>

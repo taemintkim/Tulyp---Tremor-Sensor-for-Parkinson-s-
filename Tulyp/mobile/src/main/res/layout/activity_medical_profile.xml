@@ -13,11 +13,141 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <ListView
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/fullname"
+        android:hint="Full Name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/medicalprofile"
-        android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true" />
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/dateofbirth"
+        android:layout_below="@+id/fullname"
+        android:layout_alignEnd="@+id/fullname"
+        android:layout_alignStart="@+id/fullname"
+        android:layout_marginTop="20dp"
+        android:hint="Date of Birth" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Height"
+        android:id="@+id/height"
+        android:layout_below="@+id/dateofbirth"
+        android:layout_alignStart="@+id/savebutton"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="5dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="Save"
+        android:id="@+id/savebutton"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_below="@+id/spinner"
+        android:layout_alignEnd="@+id/spinner"
+        android:layout_alignStart="@+id/dateofbirth"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/inches"
+        android:layout_below="@+id/dateofbirth"
+        android:layout_toEndOf="@+id/ft"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="in"
+        android:id="@+id/in"
+        android:layout_alignTop="@+id/ft"
+        android:layout_toEndOf="@+id/inches" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ft"
+        android:id="@+id/ft"
+        android:layout_above="@+id/weight"
+        android:layout_toEndOf="@+id/feet" />
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/feet"
+        android:layout_alignTop="@+id/inches"
+        android:layout_toEndOf="@+id/gender"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Weight"
+        android:id="@+id/weight"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/height"
+        android:layout_alignStart="@+id/dateofbirth"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="lb"
+        android:id="@+id/lb"
+        android:layout_above="@+id/gender"
+        android:layout_alignStart="@+id/ft" />
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/pounds"
+        android:layout_below="@+id/feet"
+        android:layout_alignStart="@+id/feet"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Gender"
+        android:id="@+id/gender"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/weight"
+        android:layout_alignStart="@+id/dateofbirth"
+        android:layout_marginTop="30dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_alignTop="@+id/gender"
+        android:layout_alignStart="@+id/pounds"
+        android:layout_alignEnd="@+id/dateofbirth"
+        android:entries="@array/gender_options" />
 
 </RelativeLayout>

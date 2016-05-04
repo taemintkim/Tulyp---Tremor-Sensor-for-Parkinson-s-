@@ -61,15 +61,39 @@ public class PageFragment extends Fragment {
         YAxis yAxis = chart.getAxisLeft();
         chart.getAxisRight().setEnabled(false);
         if (mPage == 1) {
-
+            LineData data = getData(24, 600);
+            chart.setData(data);
+            xAxis.setLabelsToSkip(1);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setDrawGridLines(false);
+            yAxis.setDrawGridLines(false);
+            chart.setDescription("");
+            chart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
+            label.setText("Time (Hours)");
             // day
 
         } else if (mPage == 2) {
-
+            LineData data = getData(7, 600);
+            chart.setData(data);
+            xAxis.setLabelsToSkip(0);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setDrawGridLines(false);
+            yAxis.setDrawGridLines(false);
+            chart.setDescription("");
+            chart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
+            label.setText("Time (Days)");
             // week
 
         } else if (mPage == 3) {
-
+            LineData data = getData(30, 600);
+            chart.setData(data);
+            xAxis.setLabelsToSkip(2);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setDrawGridLines(false);
+            yAxis.setDrawGridLines(false);
+            chart.setDescription("");
+            chart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
+            label.setText("Time (Days)");
             // month
 
         } else if (mPage == 4) {
@@ -96,9 +120,11 @@ public class PageFragment extends Fragment {
 
         ArrayList<String> xVals = new ArrayList<String>();
         ArrayList<Entry> yVals = new ArrayList<Entry>();
+        int[] arr = {200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320,
+                200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320,
+                200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320};
         for (int i = 0; i < count; i++) {
             xVals.add(Integer.toString(i + 1));
-            int[] arr = {200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320};
             yVals.add(new Entry(arr[i], i));
         }
 

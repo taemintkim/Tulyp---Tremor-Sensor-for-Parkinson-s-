@@ -18,7 +18,7 @@ public class PatientView extends AppCompatActivity {
         setContentView(R.layout.activity_patient_view);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Joanna Hansen");
+        toolbar.setTitle("Medical Data");
         setSupportActionBar(toolbar);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);

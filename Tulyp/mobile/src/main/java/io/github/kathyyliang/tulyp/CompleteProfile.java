@@ -1,6 +1,5 @@
 package io.github.kathyyliang.tulyp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +24,7 @@ public class CompleteProfile extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         int gender = spinner.getSelectedItemPosition();
 
-        Button button = (Button) findViewById(R.id.finishprofile);
+        Button button = (Button) findViewById(R.id.savebutton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

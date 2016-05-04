@@ -55,7 +55,7 @@
         android:text="Height"
         android:id="@+id/height"
         android:layout_below="@+id/dateofbirth"
-        android:layout_alignStart="@+id/finishprofile"
+        android:layout_alignStart="@+id/savebutton"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="5dp" />
 
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:text="Finish"
-        android:id="@+id/finishprofile"
+        android:id="@+id/savebutton"
         android:backgroundTint="@color/colorPrimary"
         android:layout_below="@+id/spinner"
         android:layout_alignEnd="@+id/spinner"

@@ -28,6 +28,9 @@ public class PatientSettings extends AppCompatActivity {
                 if (text.equalsIgnoreCase("Medical Profile")) {
                     Intent intent = new Intent(getBaseContext(), MedicalProfile.class);
                     startActivity(intent);
+                } else if (text.equalsIgnoreCase("Medication")) {
+                    Intent intent = new Intent(getBaseContext(), Medication.class);
+                    startActivity(intent);
                 } else if (text.equalsIgnoreCase("Account")) {
                     Intent intent = new Intent(getBaseContext(), AccountInfo.class);
                     startActivity(intent);

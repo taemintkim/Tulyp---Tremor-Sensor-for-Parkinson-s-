@@ -21,19 +21,6 @@ public class MedicalProfile extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Medical Profile");
         setSupportActionBar(toolbar);
-
-        ListView listView = (ListView) findViewById(R.id.medicalprofile);
-        assert listView != null;
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String text = (String) ((TextView) view).getText();
-                if (text.equalsIgnoreCase("Medication")) {
-                    Intent intent = new Intent(getBaseContext(), Medication.class);
-                    startActivity(intent);
-                }
-            }
-        });
     }
 
 
