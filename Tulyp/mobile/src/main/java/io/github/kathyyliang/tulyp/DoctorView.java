@@ -20,6 +20,7 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class DoctorView extends AppCompatActivity {
     MyFirebase mfirebase = TulypApplication.mFirebase;
@@ -75,8 +76,12 @@ public class DoctorView extends AppCompatActivity {
                     for (User u : patients) {
                         names.add(u.getName());
                         age.add(u.getBirthdate());
-
-                        medication.add((String) u.getMedications().keySet().toArray()[0]);
+                        Set meds = u.getMedications().keySet();
+                        if (meds == null || meds.size() == 0) {
+                            medication.add("");
+                        } else {
+                            medication.add((String) meds.toArray()[0]);
+                        }
                     }
 
                     updatePatientList();

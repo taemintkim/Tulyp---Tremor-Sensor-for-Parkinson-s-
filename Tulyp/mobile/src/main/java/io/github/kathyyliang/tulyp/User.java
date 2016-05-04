@@ -25,7 +25,7 @@ public class User {
     private int gender = 2;
     private String weight;
     private ArrayList<String> height;
-    private HashMap<String, Drug> medications;
+    private HashMap<String, Drug> medications = new HashMap<>();
     private String tremordata;
     private ArrayList<User> patients = new ArrayList<>();
     private ArrayList<String> patientIDs = new ArrayList<>();
