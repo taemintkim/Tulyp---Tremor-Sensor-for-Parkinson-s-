@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class DoctorMedication extends AppCompatActivity {
     User user = TulypApplication.mUser;
-    HashMap<String, Drug> drugs = new HashMap<>();
+    MyFirebase mfirebase = TulypApplication.mFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,10 @@ public class DoctorMedication extends AppCompatActivity {
 
         Drug d = new Drug(instr, warns, start, end);
 
+        HashMap<String, Drug> drugs = new HashMap<>();
         drugs.put(medName, d);
         user.setMedications(drugs);
+        mfirebase.setNewUserInfo(user);
 
         Intent intent = new Intent(getBaseContext(), ViewMedicalProfile.class);
         startActivity(intent);
