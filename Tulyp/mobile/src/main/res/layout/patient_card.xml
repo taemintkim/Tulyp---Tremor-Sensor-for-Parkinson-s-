@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/medicalprofilebutton"
         android:layout_below="@id/line"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         style="?android:attr/borderlessButtonStyle"
         android:text="Medical Profile"
         android:textAllCaps="false"
