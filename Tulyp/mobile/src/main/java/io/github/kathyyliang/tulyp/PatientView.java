@@ -11,11 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class PatientView extends AppCompatActivity {
+    MyFirebase myFirebase = TulypApplication.mFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_view);
+        testTremordata();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Medical Data");
@@ -26,6 +28,10 @@ public class PatientView extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void testTremordata() {
+        myFirebase.pullSensorData("0b1627fb-1353-4a07-bacf-118fa6cd79ee");
     }
 
     @Override

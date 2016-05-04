@@ -28,6 +28,7 @@ public class Drug {
     }
 
     private String end_date;
+
     public Drug(){}
     public Drug(String inst, String warnings, String start_date, String end_date) {
         this.instructions = inst;

@@ -17,7 +17,11 @@ import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -218,16 +222,20 @@ public class MyFirebase {
     }
 
     /**
-     *
      * @param uid
      */
-    private void pullSensorData(String uid) {
+    public void pullSensorData(String uid) {
         Firebase userRef = mfirebase.child("SensorData").child(uid);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 HashMap<String, Object> data = (HashMap<String, Object>) snapshot.getValue();
+                if (data == null) {
+                    Log.d("Firebase", "No Sensor data for this user");
+                    return;
+                }
                 TulypApplication.setTremordata(data);
+                double[] avg = makeDayDataPoints(data);
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
@@ -236,32 +244,57 @@ public class MyFirebase {
         });
     }
 
-//    public void getDayTremorData(String uid) {
-//        Query queryRef = mfirebase.child("SensorData").orderByKey().limitToFirst(2);
-//        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                HashMap<String, Object> map = (HashMap<String, Object>) snapshot.getValue();
-//                String patID;
-//                if (map == null) {
-//                    patID = null;
-//                } else {
-//                    String[] ids = map.keySet().toArray(new String[1]);
-//                    patID = ids[0];
-//                }
-//                if (patID == null || patID.equals("")) {
-//                    //todo: no patient with that email found.
-//                    Log.d("AddPatient", "No patient found for input email");
-//                    return;
-//                }
-//                user.addPatientID(patID);
-//                Log.d("AddPatient", "Successfully found patient's ID" + patID);
-//                myfirebase.setNewUserInfo(user);
-//            }
-//            @Override
-//            public void onCancelled(FirebaseError firebaseError) {
-//                Log.d("Firebase", "Failed to retrieve User data\n" + firebaseError);
-//            }
-//        });
-//    }
+    /**
+     * @param tremordata
+     * @return Map with hour as key, averaged tremor data for the hour as value.
+     */
+    public double[] makeDayDataPoints(Map<String, Object> tremordata) {
+        long curTime = System.currentTimeMillis();
+        Calendar curDate = Calendar.getInstance();
+        curDate.setTimeInMillis(curTime);
+        Locale locale = Locale.getDefault();
+        Integer hourint = curDate.get(Calendar.HOUR_OF_DAY) - 3;
+        curDate.add(Calendar.HOUR, -1);
+
+        String[] keys = tremordata.keySet().toArray(new String[tremordata.size()]);
+        HashMap<Integer, ArrayList<Double>> hourlyData = new HashMap<>(); //hour of day : averaged tremor speed
+        ArrayList<Long> timestamps = new ArrayList<>();
+        Calendar keyCal = Calendar.getInstance();
+        for (String key : keys) {
+            long keytime = Long.parseLong(key);
+            timestamps.add(keytime);
+        }
+        Collections.sort(timestamps, Collections.reverseOrder());
+        for (Long stamp: timestamps) {
+            keyCal.setTimeInMillis(stamp);
+            if (keyCal.after(curDate)) {
+                HashMap<String, String> curdata = (HashMap<String, String>) tremordata.get(String.valueOf(stamp));
+                Double curdouble = Double.parseDouble(curdata.get("speed"));
+                if (hourlyData.containsKey(hourint)) {
+                    hourlyData.get(hourint).add(curdouble);
+                } else {
+                    ArrayList<Double> ad = new ArrayList<Double>();
+                    ad.add(curdouble);
+                    hourlyData.put(hourint, ad);
+                }
+            } else {
+                curDate.add(Calendar.HOUR, -1);
+                hourint -= 1;
+            }
+            if (hourint < 0) {
+                break;
+            }
+        }
+        double[] result = new double[24];
+        Integer[] hkeys = hourlyData.keySet().toArray(new Integer[hourlyData.size()]);
+        for (Integer key : hkeys) {
+            ArrayList<Double> lst = hourlyData.get(key);
+            Double sum = 0.0;
+            for (Double x : lst) {
+                sum += x;
+            }
+            result[key] = sum/lst.size();
+        }
+        return result;
+    }
 }
