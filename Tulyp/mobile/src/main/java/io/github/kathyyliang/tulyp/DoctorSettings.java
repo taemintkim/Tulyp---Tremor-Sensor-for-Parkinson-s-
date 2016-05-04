@@ -37,5 +37,8 @@ public class DoctorSettings extends AppCompatActivity {
 
     private void logout() {
         TulypApplication.mFirebase.logout();
+        TulypApplication.mUser = null;
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
     }
 }
