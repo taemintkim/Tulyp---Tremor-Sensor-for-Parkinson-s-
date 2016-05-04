@@ -32,4 +32,8 @@ public class DoctorSettings extends AppCompatActivity {
             }
         });
     }
+
+    private void logout() {
+        TulypApplication.mFirebase.logout();
+    }
 }

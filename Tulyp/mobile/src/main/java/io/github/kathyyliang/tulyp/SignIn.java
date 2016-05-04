@@ -27,6 +27,8 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        TulypApplication.mFirebase.logout(); //make sure no one is already logged in already.
+
         Button signIn = (Button) findViewById(R.id.signinbutton);
         assert signIn != null;
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +46,7 @@ public class SignIn extends AppCompatActivity {
                         if (authData != null) {
                             EditText email = (EditText) findViewById(R.id.joinnowemail);
                             String uid = authData.getUid();
-                            mfirebase.setUID(uid);
+                            Log.d("##UID##", uid);
                             mfirebase.getFirebaseRef().child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {

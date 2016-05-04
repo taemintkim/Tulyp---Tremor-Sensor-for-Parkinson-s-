@@ -26,9 +26,8 @@ import java.util.Map;
  */
 public class MyFirebase {
     private Firebase mfirebase;
-    private String uid;
+//    private String uid;
     private String email;
-
     public MyFirebase() {
         mfirebase = new Firebase("https://tulyp.firebaseio.com");
     }
@@ -46,7 +45,8 @@ public class MyFirebase {
             public void onError(FirebaseError firebaseError) {
                 // there was an error
                 Log.d("Firebase", "Create User unsuccessful. >:(\n" + firebaseError);
-                Intent intent = new Intent(TulypApplication.getAppContext(), DoctorQuestion.class);
+                Intent intent = new Intent(TulypApplication.getAppContext(), JoinNow.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 TulypApplication.getAppContext().startActivity(intent);
             }
         });
@@ -67,8 +67,8 @@ public class MyFirebase {
         mfirebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
-                Log.d("Firebase", "Login successful!");
-                uid = authData.getUid();
+                String uid = authData.getUid();
+                Log.d("Firebase", "Login successful! " + uid);
 //                mfirebase.child("Users").child(uid).keepSynced(true); //keep local data synced even when offline.
 //                System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
 //                CharSequence text = "Login Successful!";
@@ -136,7 +136,6 @@ public class MyFirebase {
      * @return true if successfully unauthenticated from Firebase
      */
     public boolean logout() {
-        uid = null;
         if (isAuthenticated()) {
             mfirebase.unauth();
             return !isAuthenticated();
@@ -145,12 +144,13 @@ public class MyFirebase {
     }
 
     public String getUID() {
-        return mfirebase.getAuth().getUid();
+        if (isAuthenticated()) {
+            return mfirebase.getAuth().getUid();
+        } else {
+            return null;
+        }
     }
 
-    public void setUID(String uid) {
-        this.uid = uid;
-    }
 
     /**
      * Stores user data to Firebase.
@@ -179,7 +179,8 @@ public class MyFirebase {
      *             ex. "name" as key; "McDonald" as value.
      */
     public void addUserInfo(HashMap<String, Object> info) {
-        Firebase userRef = mfirebase.child("Users").child(uid);
+
+        Firebase userRef = mfirebase.child("Users").child(getUID());
         userRef.updateChildren(info);
     }
 
@@ -187,7 +188,7 @@ public class MyFirebase {
      * fetches the currently authenticated user's profile data.
      */
     public void fetchUserData() {
-        mfirebase.child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        mfirebase.child("Users").child(getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 TulypApplication.mUser = snapshot.getValue(User.class);
@@ -216,6 +217,4 @@ public class MyFirebase {
             Log.d("Firebase", "Not authenticated");
         }
     }
-
-
 }

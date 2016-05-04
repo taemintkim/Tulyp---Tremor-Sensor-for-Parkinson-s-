@@ -35,4 +35,8 @@ public class PatientSettings extends AppCompatActivity {
             }
         });
     }
+
+    private void logout() {
+        TulypApplication.mFirebase.logout();
+    }
 }

@@ -25,8 +25,6 @@ public class AddPatient extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Add Patient");
         setSupportActionBar(toolbar);
-        addPatient("nonexistent@csa.com");
-        addPatient("thomas3@f.com");
     }
 
     public void addPatient(String email) {

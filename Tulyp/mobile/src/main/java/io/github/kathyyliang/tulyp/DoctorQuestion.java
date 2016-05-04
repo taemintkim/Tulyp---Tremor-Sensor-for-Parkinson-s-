@@ -22,6 +22,7 @@ public class DoctorQuestion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TulypApplication.mUser.setIsDoctor(true);
+                TulypApplication.mFirebase.setNewUserInfo(TulypApplication.mUser);
                 Intent intent = new Intent(getBaseContext(), DoctorView.class);
                 startActivity(intent);
             }
@@ -32,6 +33,7 @@ public class DoctorQuestion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TulypApplication.mUser.setIsDoctor(false);
+                TulypApplication.mFirebase.setNewUserInfo(TulypApplication.mUser);
                 Intent intent = new Intent(getBaseContext(), CompleteProfile.class);
                 startActivity(intent);
             }

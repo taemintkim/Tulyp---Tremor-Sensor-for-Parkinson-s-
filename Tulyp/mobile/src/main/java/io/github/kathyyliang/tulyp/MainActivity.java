@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         sendIntent.putExtra("TYPE", "start");
         startService(sendIntent);
 
+
         Button signIn = (Button) findViewById(R.id.startsignin);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override

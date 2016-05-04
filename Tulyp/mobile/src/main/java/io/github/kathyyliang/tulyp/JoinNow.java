@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,9 @@ public class JoinNow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_now);
 
+        TulypApplication.mFirebase.logout(); //make sure no one is already logged in already.
+
+
         Button joinNow = (Button) findViewById(R.id.joinnowbutton);
         assert joinNow != null;
         joinNow.setOnClickListener(new View.OnClickListener() {
@@ -41,8 +45,8 @@ public class JoinNow extends AppCompatActivity {
                         if (authData != null) {
                             EditText email = (EditText) findViewById(R.id.joinnowemail);
                             String uid = authData.getUid();
-                            mfirebase.setUID(uid);
-                            TulypApplication.mFirebase.setNewUserInfo(new User(email.getText().toString()));
+                            Log.d("##UID JOINNOW##", uid);
+                            TulypApplication.mFirebase.setNewUserInfo(TulypApplication.mUser);
                             Intent intent = new Intent(getBaseContext(), DoctorQuestion.class);
                             startActivity(intent);
                         } else {
