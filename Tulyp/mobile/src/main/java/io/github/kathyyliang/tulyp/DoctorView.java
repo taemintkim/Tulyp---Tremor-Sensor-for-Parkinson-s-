@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
@@ -24,6 +25,10 @@ public class DoctorView extends AppCompatActivity {
     MyFirebase mfirebase = TulypApplication.mFirebase;
     User mUser = TulypApplication.mUser;
     ArrayList<User> patients = new ArrayList<>();
+    ArrayList<String> names = new ArrayList<String>();
+    ArrayList<String> medication = new ArrayList<String>();
+    ArrayList<String> age = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,14 @@ public class DoctorView extends AppCompatActivity {
         ArrayList<String> patientIDs = mUser.getPatientIDs();
         fetchPatientsData(patientIDs);
 
+
+
+        final ListView patientList = (android.widget.ListView) findViewById(R.id.patientList);
+
+        final PatientArrayAdapter adapter = new PatientArrayAdapter(this, names, medication, patientIDs, age);
+        patientList.setAdapter(adapter);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Patients");
         setSupportActionBar(toolbar);
@@ -50,6 +63,7 @@ public class DoctorView extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     /**
@@ -65,6 +79,7 @@ public class DoctorView extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     patients.add(snapshot.getValue(User.class));
+
                     //todo: update View to show patient information
                 }
                 @Override
@@ -72,6 +87,11 @@ public class DoctorView extends AppCompatActivity {
                     Log.d("DoctorView", "Failed to retrieve User data\n" + firebaseError);
                 }
             });
+        }
+        for (User u: patients) {
+            names.add(u.getName());
+//            medication.add();
+            age.add(u.getBirthdate());
         }
     }
 
