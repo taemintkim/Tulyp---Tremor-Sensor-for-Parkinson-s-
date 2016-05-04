@@ -12,13 +12,27 @@
         android:background="@color/colorPrimaryDark"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Joanna Hansen"
+        android:textSize="25dp"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/name_profile"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#4a4c61"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/medicalprofile"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/name_profile"
+        android:layout_alignParentEnd="true"
+
+
+        />
 
 
 </RelativeLayout>

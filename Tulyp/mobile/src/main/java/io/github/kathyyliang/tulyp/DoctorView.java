@@ -18,6 +18,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,6 +31,11 @@ public class DoctorView extends AppCompatActivity {
     ArrayList<String> medication = new ArrayList<String>();
     ArrayList<String> age = new ArrayList<String>();
     ArrayList<String> patientIDs = new ArrayList<>();
+    ArrayList<String> weight= new ArrayList<String>();;
+    ArrayList<ArrayList<String>> height= new ArrayList<ArrayList<String>>();;
+    ArrayList<Integer> gender = new ArrayList<Integer>();
+    ArrayList<String> contact= new ArrayList<String>();;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +81,11 @@ public class DoctorView extends AppCompatActivity {
                     for (User u : patients) {
                         names.add(u.getName());
                         age.add(u.getBirthdate());
+                        height.add(u.getHeight());
+                        gender.add(u.getGender());
+                        contact.add(u.getEmail());
+                        weight.add(u.getWeight());
+
 
                         medication.add((String) u.getMedications().keySet().toArray()[0]);
                     }
@@ -92,7 +103,7 @@ public class DoctorView extends AppCompatActivity {
 
     private void updatePatientList() {
         final ListView patientList = (android.widget.ListView) findViewById(R.id.patientList);
-        final PatientArrayAdapter adapter = new PatientArrayAdapter(this, names, medication, patientIDs, age);
+        final PatientArrayAdapter adapter = new PatientArrayAdapter(this, names, medication, patientIDs, age, gender, height, weight, contact);
         patientList.setAdapter(adapter);
     }
 

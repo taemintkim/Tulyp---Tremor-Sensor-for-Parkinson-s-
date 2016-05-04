@@ -21,13 +21,21 @@ public class PatientArrayAdapter extends BaseAdapter {
     protected ArrayList<String> age;
     protected Context context;
     protected ArrayList<String> patientID;
+    protected ArrayList<String> weight;
+    protected ArrayList<String> contact;
+    protected ArrayList<Integer> gender;
+    protected ArrayList<ArrayList<String>> height;
 
-    public PatientArrayAdapter(Context context, ArrayList<String> names, ArrayList<String> medication, ArrayList<String> patientID, ArrayList<String> age){
+    public PatientArrayAdapter(Context context, ArrayList<String> names, ArrayList<String> medication, ArrayList<String> patientID, ArrayList<String> age, ArrayList<Integer> gender, ArrayList<ArrayList<String>> height, ArrayList<String> weight, ArrayList<String> contact){
         this.context = context;
         this.medication = medication;
         this.age = age;
         this.names = names;
         this.patientID = patientID;
+        this.height = height;
+        this.weight = weight;
+        this.gender = gender;
+        this.contact = contact;
 
     }
         @Override
@@ -71,7 +79,13 @@ public class PatientArrayAdapter extends BaseAdapter {
 
                 //Send Toast or Launch Activity here
                 Intent detail = new Intent(context, ViewMedicalProfile.class);
-                detail.putExtra("patientID", patientID.get(position));
+                detail.putExtra("name", names.get(position));
+                detail.putExtra("age", names.get(position));
+                detail.putExtra("medication", medication.get(position));
+                detail.putExtra("gender", Integer.toString(gender.get(position)));
+                detail.putExtra("height", height.get(position));
+                detail.putExtra("weight", weight.get(position));
+                detail.putExtra("contact", contact.get(position));
                 context.startActivity(detail);
 
 
