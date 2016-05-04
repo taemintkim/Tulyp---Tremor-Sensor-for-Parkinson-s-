@@ -1,7 +1,5 @@
 package io.github.kathyyliang.tulyp;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +13,6 @@ import android.widget.TextView;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-
-import java.util.Map;
 
 //todo: what if email and password are empty?
 public class JoinNow extends AppCompatActivity {
@@ -37,8 +32,8 @@ public class JoinNow extends AppCompatActivity {
             public void onClick(View v) {
                 counter = 0;
                 MyFirebase mfirebase = TulypApplication.mFirebase;
-                EditText email = (EditText) findViewById(R.id.joinnowemail);
-                EditText password = (EditText) findViewById(R.id.joinnowpassword);
+                EditText email = (EditText) findViewById(R.id.email);
+                EditText password = (EditText) findViewById(R.id.currentpassword);
                 mfirebase.createUser(email.getText().toString(), password.getText().toString());
 
                 TulypApplication.mFirebase.getFirebaseRef().addAuthStateListener(new Firebase.AuthStateListener() {
@@ -46,7 +41,7 @@ public class JoinNow extends AppCompatActivity {
                     public void onAuthStateChanged(AuthData authData) {
                         MyFirebase mfirebase = TulypApplication.mFirebase;
                         if (authData != null && counter < 1) {
-                            EditText email = (EditText) findViewById(R.id.joinnowemail);
+                            EditText email = (EditText) findViewById(R.id.email);
                             String uid = authData.getUid();
                             Log.d("##UID JOINNOW##", uid);
                             counter++;

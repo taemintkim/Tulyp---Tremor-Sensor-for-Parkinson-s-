@@ -1,10 +1,7 @@
 package io.github.kathyyliang.tulyp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
@@ -50,7 +46,7 @@ public class SignIn extends AppCompatActivity {
                     public void onAuthStateChanged(AuthData authData) {
                         MyFirebase mfirebase = TulypApplication.mFirebase;
                         if (authData != null) {
-                            EditText email = (EditText) findViewById(R.id.joinnowemail);
+                            EditText email = (EditText) findViewById(R.id.email);
                             String uid = authData.getUid();
                             Log.d("##UID##", uid);
                             mfirebase.getFirebaseRef().child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
