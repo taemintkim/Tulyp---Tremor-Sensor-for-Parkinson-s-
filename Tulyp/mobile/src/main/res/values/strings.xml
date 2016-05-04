@@ -38,11 +38,11 @@
         <item>Password</item>
     </string-array>-->
 
-    <string-array name="medication">
+    <!--<string-array name="medication">
         <item>Sinemet</item>
         <item>Take 2 tablets by mouth daily</item>
         <item>Warnings: may cause dizziness</item>
         <item>First day of use: 01/01/2016</item>
-    </string-array>
+    </string-array>-->
     <string name="title_activity_test">TestActivity</string>
 </resources>
