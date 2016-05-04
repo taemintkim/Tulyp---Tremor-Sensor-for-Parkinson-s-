@@ -70,7 +70,7 @@ public class PatientArrayAdapter extends BaseAdapter {
             public void onClick(View view) {
 
                 //Send Toast or Launch Activity here
-                Intent detail = new Intent(context, MedicalProfile.class);
+                Intent detail = new Intent(context, ViewMedicalProfile.class);
                 detail.putExtra("patientID", patientID.get(position));
                 context.startActivity(detail);
 

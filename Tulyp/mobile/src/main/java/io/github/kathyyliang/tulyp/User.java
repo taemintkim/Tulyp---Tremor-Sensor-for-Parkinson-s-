@@ -27,9 +27,8 @@ public class User {
     private ArrayList<String> height;
     private HashMap<String, Drug> medications;
     private String tremordata;
-    private ArrayList<User> patients;
-    private ArrayList<String> patientIDs;
-
+    private ArrayList<User> patients = new ArrayList<>();
+    private ArrayList<String> patientIDs = new ArrayList<>();
 
     public User() {
     }
