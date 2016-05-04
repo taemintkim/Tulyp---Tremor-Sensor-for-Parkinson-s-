@@ -14,6 +14,15 @@
         android:src="@drawable/landingfield"
         android:alpha="0.75" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please complete your Medical Profile"
+        android:id="@+id/profileinstructions"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,29 +48,16 @@
         android:layout_marginTop="20dp"
         android:hint="Date of Birth" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/heightfield"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Height"
+        android:id="@+id/height"
         android:layout_below="@+id/dateofbirth"
-        android:layout_marginTop="20dp"
-        android:layout_alignEnd="@+id/dateofbirth"
-        android:layout_alignStart="@+id/dateofbirth"
-        android:hint="Height" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/weightfield"
-        android:hint="Weight"
-        android:layout_below="@+id/heightfield"
-        android:layout_alignStart="@+id/heightfield"
-        android:layout_marginTop="20dp"
-        android:layout_alignEnd="@+id/heightfield" />
+        android:layout_alignStart="@+id/finishprofile"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="5dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -70,45 +66,98 @@
         android:id="@+id/finishprofile"
         android:backgroundTint="@color/colorPrimary"
         android:alpha="0.75"
-        android:layout_below="@+id/gendergroup"
-        android:layout_alignStart="@+id/gendergroup"
-        android:layout_alignEnd="@+id/gendergroup"
+        android:layout_below="@+id/spinner"
+        android:layout_alignEnd="@+id/spinner"
+        android:layout_alignStart="@+id/dateofbirth"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/inches"
+        android:layout_below="@+id/dateofbirth"
+        android:layout_toEndOf="@+id/ft"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="in"
+        android:id="@+id/in"
+        android:layout_alignTop="@+id/ft"
+        android:layout_toEndOf="@+id/inches" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ft"
+        android:id="@+id/ft"
+        android:layout_above="@+id/weight"
+        android:layout_toEndOf="@+id/feet" />
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/feet"
+        android:layout_alignTop="@+id/inches"
+        android:layout_toEndOf="@+id/gender"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Weight"
+        android:id="@+id/weight"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/height"
+        android:layout_alignStart="@+id/dateofbirth"
         android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please complete your Medical Profile"
-        android:id="@+id/profileinstructions"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="lb"
+        android:id="@+id/lb"
+        android:layout_above="@+id/gender"
+        android:layout_alignStart="@+id/ft" />
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/pounds"
+        android:layout_below="@+id/feet"
+        android:layout_alignStart="@+id/feet"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Gender"
+        android:id="@+id/gender"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/weight"
+        android:layout_alignStart="@+id/dateofbirth"
         android:layout_marginTop="30dp" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
+    <Spinner
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/weightfield"
-        android:id="@+id/gendergroup"
-        android:orientation="horizontal"
-        android:layout_alignStart="@+id/weightfield"
-        android:layout_alignEnd="@+id/weightfield"
-        android:layout_marginTop="30dp"
-        android:gravity="center_horizontal"
-        android:checkedButton="@+id/malebutton">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male"
-            android:id="@+id/malebutton"
-            android:layout_marginRight="20dp" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female"
-            android:id="@+id/femalebutton"
-            android:layout_marginLeft="20dp" />
-    </RadioGroup>
+        android:id="@+id/spinner"
+        android:layout_alignTop="@+id/gender"
+        android:layout_alignStart="@+id/pounds"
+        android:layout_alignEnd="@+id/dateofbirth"
+        android:entries="@array/gender_options" />
 
 </RelativeLayout>
