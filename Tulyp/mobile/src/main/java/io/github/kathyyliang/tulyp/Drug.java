@@ -36,5 +36,16 @@ public class Drug {
         this.end_date = end_date;
     }
 
+    public String[] toArray() {
+        String[] arr = new String[4];
+
+        arr[0] = "";
+        arr[1] = String.format("Instructions: %s", instructions);
+        arr[2] = String.format("Warnings: %s", warnings);
+        arr[3] = String.format("Dates of use: %s - %s", start_date, end_date);
+
+        return arr;
+    }
+
 
 }
