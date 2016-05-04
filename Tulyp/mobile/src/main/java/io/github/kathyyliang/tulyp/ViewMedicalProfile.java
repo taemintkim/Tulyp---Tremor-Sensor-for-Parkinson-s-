@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-<<<<<<< HEAD
-=======
 import android.view.View;
 import android.widget.AdapterView;
->>>>>>> origin/master
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +21,8 @@ public class ViewMedicalProfile extends AppCompatActivity {
     protected ArrayList<String> height;
     protected String medication;
     protected String age;
+    ListView patientList;
+    MedicalProfileAdapter adapter;
 
 
 
@@ -44,7 +43,7 @@ public class ViewMedicalProfile extends AppCompatActivity {
         toolbar.setTitle("Medical Profile");
         setSupportActionBar(toolbar);
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
         TextView nameView = (TextView) findViewById(R.id.name_profile);
         nameView.setText(intent.getStringExtra("name"));
         weight = intent.getStringExtra("weight");
@@ -55,11 +54,11 @@ public class ViewMedicalProfile extends AppCompatActivity {
 
 
 
-        final ListView patientList = (android.widget.ListView) findViewById(R.id.medicalprofile);
-        final MedicalProfileAdapter adapter = new MedicalProfileAdapter(this, headings, height, weight, age, gender, contact, medication);
+        patientList = (android.widget.ListView) findViewById(R.id.medicalprofile);
+        adapter = new MedicalProfileAdapter(this, headings, height, weight, age, gender, contact, medication);
         patientList.setAdapter(adapter);
 
-=======
+//=======
         ListView listView = (ListView) findViewById(R.id.medicalprofile);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -71,6 +70,6 @@ public class ViewMedicalProfile extends AppCompatActivity {
                 }
             }
         });
->>>>>>> origin/master
+//>>>>>>> origin/master
     }
 }

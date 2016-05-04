@@ -60,7 +60,7 @@ public class MedicalProfileAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.patient_card, parent, false);
 
-        TextView heading = (TextView)v.findViewById(R.id.heading);
+        TextView heading = (TextView) v.findViewById(R.id.heading); //this returns null!
         heading.setText(headings[position]);
 
         TextView detail = (TextView)v.findViewById(R.id.detailrow);

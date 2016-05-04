@@ -84,22 +84,18 @@ public class DoctorView extends AppCompatActivity {
                     for (User u : patients) {
                         names.add(u.getName());
                         age.add(u.getBirthdate());
-<<<<<<< HEAD
                         height.add(u.getHeight());
                         gender.add(u.getGender());
                         contact.add(u.getEmail());
                         weight.add(u.getWeight());
 
-
-                        medication.add((String) u.getMedications().keySet().toArray()[0]);
-=======
+//                        medication.add((String) u.getMedications().keySet().toArray()[0]);
                         Set meds = u.getMedications().keySet();
                         if (meds == null || meds.size() == 0) {
                             medication.add("");
                         } else {
                             medication.add((String) meds.toArray()[0]);
                         }
->>>>>>> origin/master
                     }
 
                     updatePatientList();
