@@ -57,6 +57,9 @@ public class DoctorView extends AppCompatActivity {
      * @param uids
      */
     public void fetchPatientsData(ArrayList<String> uids) {
+        if (uids == null) { //this doctor has no patients.
+            return;
+        }
         for (String id : uids) {
             mfirebase.getFirebaseRef().child("Users").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

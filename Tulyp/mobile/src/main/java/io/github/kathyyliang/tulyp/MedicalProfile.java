@@ -9,7 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+//todo: this whole activity. User profile data is in mUser.
 public class MedicalProfile extends AppCompatActivity {
+    User user = TulypApplication.mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class MedicalProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ListView listView = (ListView) findViewById(R.id.medicalprofile);
+        assert listView != null;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -32,4 +35,6 @@ public class MedicalProfile extends AppCompatActivity {
             }
         });
     }
+
+
 }

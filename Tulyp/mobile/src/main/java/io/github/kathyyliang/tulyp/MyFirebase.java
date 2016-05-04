@@ -27,6 +27,7 @@ import java.util.Map;
 public class MyFirebase {
     private Firebase mfirebase;
     private String uid;
+    private String email;
 
     public MyFirebase() {
         mfirebase = new Firebase("https://tulyp.firebaseio.com");
@@ -38,7 +39,6 @@ public class MyFirebase {
             public void onSuccess(Map<String, Object> result) {
                 Log.d("Firebase", "Create User successful!");
                 TulypApplication.mUser = new User(email);
-                Log.d("firebase", "done with setting user");
                 login(email, password);
             }
 
@@ -46,6 +46,8 @@ public class MyFirebase {
             public void onError(FirebaseError firebaseError) {
                 // there was an error
                 Log.d("Firebase", "Create User unsuccessful. >:(\n" + firebaseError);
+                Intent intent = new Intent(TulypApplication.getAppContext(), DoctorQuestion.class);
+                TulypApplication.getAppContext().startActivity(intent);
             }
         });
     }
@@ -67,7 +69,7 @@ public class MyFirebase {
             public void onAuthenticated(AuthData authData) {
                 Log.d("Firebase", "Login successful!");
                 uid = authData.getUid();
-                mfirebase.child("Users").child(uid).keepSynced(true); //keep local data synced even when offline.
+//                mfirebase.child("Users").child(uid).keepSynced(true); //keep local data synced even when offline.
 //                System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
 //                CharSequence text = "Login Successful!";
 //                int duration = Toast.LENGTH_SHORT;
@@ -143,7 +145,7 @@ public class MyFirebase {
     }
 
     public String getUID() {
-        return uid;
+        return mfirebase.getAuth().getUid();
     }
 
     public void setUID(String uid) {
@@ -158,11 +160,14 @@ public class MyFirebase {
     public void setNewUserInfo(User user) {
         if (user == null) {
             Log.d("Firebase", "Trying to set a null user");
+            return;
         }
-        if (uid != null) {
-            Firebase userRef = mfirebase.child("Users").child(uid);
-            userRef.setValue("test");
+        AuthData authData = mfirebase.getAuth();
+        if (authData != null) {
+            Firebase userRef = mfirebase.child("Users").child(authData.getUid());
             userRef.setValue(user);
+        } else {
+            Log.d("Firebase", "Not authenticated");
         }
     }
 
@@ -192,6 +197,24 @@ public class MyFirebase {
                 Log.d("Firebase", "Failed to retrieve User data\n" + firebaseError);
             }
         });
+    }
+
+    /**
+     * Save sensor data to Firebase.
+     * @param data feel free to change this fit your need.
+     */
+    public void pushSensorData(HashMap<String, Object> data) {
+        if (data == null) {
+            Log.d("Firebase", "Trying to set a null user");
+            return;
+        }
+        AuthData authData = mfirebase.getAuth();
+        if (authData != null) {
+            Firebase userRef = mfirebase.child("SensorData").child(authData.getUid());
+            userRef.updateChildren(data);
+        } else {
+            Log.d("Firebase", "Not authenticated");
+        }
     }
 
 

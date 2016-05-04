@@ -15,6 +15,7 @@ import com.firebase.client.FirebaseError;
 
 import java.util.Map;
 
+//todo: what if email and password are empty?
 public class JoinNow extends AppCompatActivity {
 
     @Override
