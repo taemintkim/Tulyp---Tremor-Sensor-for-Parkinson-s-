@@ -7,17 +7,27 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import java.util.HashMap;
+
 public class PatientView extends AppCompatActivity {
-    MyFirebase myFirebase = TulypApplication.mFirebase;
+    private MyFirebase myFirebase = TulypApplication.mFirebase;
+    private double[] todaysYData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_view);
-        testTremordata();
+
+        pullSensorData(myFirebase.getUID()); //getting today's data.
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Medical Data");
@@ -30,9 +40,6 @@ public class PatientView extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void testTremordata() {
-        myFirebase.pullSensorData("0b1627fb-1353-4a07-bacf-118fa6cd79ee");
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,5 +61,36 @@ public class PatientView extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Fills in todaysYData with the averaged data points for today's tremor sensor data.
+     * todaysYData should be size 24 with index corresponding to hour of the day.
+     * @param uid of the user whose data we fetch
+     */
+    private void pullSensorData(String uid) {
+        todaysYData = new double[24];
+        Firebase mfirebase = myFirebase.getFirebaseRef();
+        Firebase userRef = mfirebase.child("SensorData").child(uid);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                HashMap<String, Object> data = (HashMap<String, Object>) snapshot.getValue();
+                if (data == null) {
+                    Log.d("Firebase", "No Sensor data for this user");
+                    todaysYData = new double[24];
+                    return;
+                }
+                TulypApplication.setTremordata(data);
+                todaysYData = MyFirebase.makeDayDataPoints(data);
+                if (todaysYData == null) {
+                    todaysYData = new double[24];
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d("Firebase", "Failed to retrieve sensor data\n" + firebaseError);
+            }
+        });
     }
 }

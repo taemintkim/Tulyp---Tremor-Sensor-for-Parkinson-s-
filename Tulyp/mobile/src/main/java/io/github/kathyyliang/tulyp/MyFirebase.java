@@ -221,34 +221,12 @@ public class MyFirebase {
         }
     }
 
-    /**
-     * @param uid
-     */
-    public void pullSensorData(String uid) {
-        Firebase userRef = mfirebase.child("SensorData").child(uid);
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                HashMap<String, Object> data = (HashMap<String, Object>) snapshot.getValue();
-                if (data == null) {
-                    Log.d("Firebase", "No Sensor data for this user");
-                    return;
-                }
-                TulypApplication.setTremordata(data);
-                double[] avg = makeDayDataPoints(data);
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                Log.d("Firebase", "Failed to retrieve sensor data\n" + firebaseError);
-            }
-        });
-    }
 
     /**
      * @param tremordata
      * @return Map with hour as key, averaged tremor data for the hour as value.
      */
-    public double[] makeDayDataPoints(Map<String, Object> tremordata) {
+    public static double[] makeDayDataPoints(Map<String, Object> tremordata) {
         long curTime = System.currentTimeMillis();
         Calendar curDate = Calendar.getInstance();
         curDate.setTimeInMillis(curTime);
