@@ -3,6 +3,7 @@ package io.github.kathyyliang.tulyp;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,12 +25,14 @@ import com.firebase.client.ValueEventListener;
 
 //todo: There are a lot of buttons that do nothing!
 public class SignIn extends AppCompatActivity {
+    private Context context;
+    private MyFirebase mfirebase = TulypApplication.mFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
+        context = this;
         TulypApplication.mFirebase.logout(); //make sure no one is already logged in already.
 
         Button signIn = (Button) findViewById(R.id.signinbutton);
@@ -41,7 +44,7 @@ public class SignIn extends AppCompatActivity {
                 MyFirebase mfirebase = TulypApplication.mFirebase;
                 EditText email = (EditText) findViewById(R.id.signinemail);
                 EditText password = (EditText) findViewById(R.id.signinpassword);
-                mfirebase.login(email.getText().toString(), password.getText().toString());
+                login(email.getText().toString(), password.getText().toString());
                 TulypApplication.mFirebase.getFirebaseRef().addAuthStateListener(new Firebase.AuthStateListener() {
                     @Override
                     public void onAuthStateChanged(AuthData authData) {
@@ -96,5 +99,73 @@ public class SignIn extends AppCompatActivity {
         SpannableString sStr = new SpannableString(str);
         sStr.setSpan(new UnderlineSpan(), 0, str.length(), 0);
         forgotPassword.setText(sStr);
+    }
+
+    private void login(String email, String password) {
+        mfirebase.getFirebaseRef().authWithPassword(email, password, new Firebase.AuthResultHandler() {
+            @Override
+            public void onAuthenticated(AuthData authData) {
+                String uid = authData.getUid();
+                Log.d("Firebase", "Login successful! " + uid);
+//                mfirebase.child("Users").child(uid).keepSynced(true); //keep local data synced even when offline.
+//                System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
+//                CharSequence text = "Login Successful!";
+//                int duration = Toast.LENGTH_SHORT;
+//                Toast toast = Toast.makeText(context, text, duration); //not sure if this way of passing in context is correct.
+//                toast.show();
+            }
+
+            @Override
+            public void onAuthenticationError(FirebaseError error) {
+                // there was an error
+                switch (error.getCode()) {
+                    case FirebaseError.USER_DOES_NOT_EXIST:
+                        // todo handle a non existing user. Show alert dialog? This is up to Frontend
+                        new AlertDialog.Builder(context)
+                                .setMessage("Woops! An account under this email does not exist.\nCheck your email address or sign up to Tulyp.")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+                        break;
+                    case FirebaseError.INVALID_PASSWORD:
+                        // handle an invalid password
+                        new AlertDialog.Builder(context)
+                                .setMessage("Invalid Password")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+                        break;
+                    case FirebaseError.INVALID_EMAIL:
+                        new AlertDialog.Builder(context)
+                                .setMessage("Invalid Email")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+                    default:
+                        // handle other errors
+                        break;
+                }
+            }
+        });
+    }
+
+    // sends an email to the user to reset their password. The user account must exist.
+    private void resetPassword(String email) {
+        mfirebase.getFirebaseRef().resetPassword(email, new Firebase.ResultHandler() {
+            @Override
+            public void onSuccess() {
+                // password reset email sent
+                new AlertDialog.Builder(context)
+                        .setMessage("Check your email to reset your password.")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+
+            @Override
+            public void onError(FirebaseError firebaseError) {
+                // error encountered
+                new AlertDialog.Builder(context)
+                        .setMessage("Something went wrong. Try again.")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
     }
 }
