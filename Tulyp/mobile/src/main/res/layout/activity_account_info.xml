@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.kathyyliang.tulyp.AccountInfo">
+    tools:context="io.github.kathyyliang.tulyp.AccountInfo"
+    tools:ignore="ExtraText">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,19 +13,16 @@
         android:background="@color/colorPrimaryDark"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Email"
         android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp" />/>
 
     <EditText
         android:layout_width="match_parent"
@@ -66,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="Save"
-        android:id="@+id/savebutton"
+        android:id="@+id/savebutton1"
         android:textColor="#ffffff"
         android:layout_below="@+id/confirmnewpassword"
         android:layout_alignStart="@+id/confirmnewpassword"
