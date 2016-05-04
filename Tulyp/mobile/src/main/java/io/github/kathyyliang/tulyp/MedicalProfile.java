@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 //todo: this whole activity. User profile data is in mUser.
+//todo: what if the patient wants to edit their info? Make an option to edit.
 public class MedicalProfile extends AppCompatActivity {
     User user = TulypApplication.mUser;
 

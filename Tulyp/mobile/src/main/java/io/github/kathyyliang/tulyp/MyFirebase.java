@@ -63,7 +63,6 @@ public class MyFirebase {
      * @param password: String password from user input.
      */
     public void login(String email, String password) {
-        //todo this Firebase instance will have to be moved to a global application context class so other activities can use it.
         mfirebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
@@ -83,7 +82,7 @@ public class MyFirebase {
                 switch (error.getCode()) {
                     case FirebaseError.USER_DOES_NOT_EXIST:
                         // todo handle a non existing user. Show alert dialog? This is up to Frontend
-//                        new AlertDialog.Builder()
+//                        new AlertDialog.Builder(SignIn.class)
 //                                .setMessage("Woops! An account under this email does not exist.\nCheck your email address or sign up to Tulyp.")
 //                                .setIcon(android.R.drawable.ic_dialog_alert)
 //                                .show();
@@ -206,7 +205,7 @@ public class MyFirebase {
      */
     public void pushSensorData(HashMap<String, Object> data) {
         if (data == null) {
-            Log.d("Firebase", "Trying to set a null user");
+            Log.d("Firebase", "Trying to pass a null object");
             return;
         }
         AuthData authData = mfirebase.getAuth();
@@ -216,5 +215,24 @@ public class MyFirebase {
         } else {
             Log.d("Firebase", "Not authenticated");
         }
+    }
+
+    /**
+     *
+     * @param uid
+     */
+    private void pullSensorData(String uid) {
+        Firebase userRef = mfirebase.child("SensorData").child(uid);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                HashMap<String, Object> data = (HashMap<String, Object>) snapshot.getValue();
+                TulypApplication.setTremordata(data);
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d("Firebase", "Failed to retrieve sensor data\n" + firebaseError);
+            }
+        });
     }
 }

@@ -29,7 +29,6 @@ public class PhoneListenerService extends WearableListenerService {
             if (event.getType() == DataEvent.TYPE_CHANGED && event.getDataItem().getUri().getPath().equals(TREMOR_DATA_PATH)) {
                 DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
                 DataMap repData = dataMapItem.getDataMap().getDataMap(TREMOR_DATA);
-
                 System.out.println(repData.toString());
             }
         }
