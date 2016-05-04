@@ -235,4 +235,33 @@ public class MyFirebase {
             }
         });
     }
+
+//    public void getDayTremorData(String uid) {
+//        Query queryRef = mfirebase.child("SensorData").orderByKey().limitToFirst(2);
+//        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                HashMap<String, Object> map = (HashMap<String, Object>) snapshot.getValue();
+//                String patID;
+//                if (map == null) {
+//                    patID = null;
+//                } else {
+//                    String[] ids = map.keySet().toArray(new String[1]);
+//                    patID = ids[0];
+//                }
+//                if (patID == null || patID.equals("")) {
+//                    //todo: no patient with that email found.
+//                    Log.d("AddPatient", "No patient found for input email");
+//                    return;
+//                }
+//                user.addPatientID(patID);
+//                Log.d("AddPatient", "Successfully found patient's ID" + patID);
+//                myfirebase.setNewUserInfo(user);
+//            }
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//                Log.d("Firebase", "Failed to retrieve User data\n" + firebaseError);
+//            }
+//        });
+//    }
 }

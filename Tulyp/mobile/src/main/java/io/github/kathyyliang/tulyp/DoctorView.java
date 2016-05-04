@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class DoctorView extends AppCompatActivity {
     MyFirebase mfirebase = TulypApplication.mFirebase;
     User mUser = TulypApplication.mUser;
-    ArrayList<User> patients = new ArrayList<>();
+    ArrayList<User> patients = TulypApplication.patients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

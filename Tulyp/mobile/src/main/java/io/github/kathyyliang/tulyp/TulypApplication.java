@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ public class TulypApplication extends Application {
     public static User mUser;
     private static Context context;
     private static HashMap<String, Object> tremordata;
+    public static ArrayList<User> patients;
 
     @Override
     public void onCreate() {
@@ -25,6 +27,7 @@ public class TulypApplication extends Application {
 //        Firebase.getDefaultConfig().setPersistenceEnabled(true);
         Firebase.setAndroidContext(this);
         mFirebase = new MyFirebase();
+        patients = new ArrayList<>();
     }
 
     public static void setTremordata(HashMap<String, Object> tremord) {

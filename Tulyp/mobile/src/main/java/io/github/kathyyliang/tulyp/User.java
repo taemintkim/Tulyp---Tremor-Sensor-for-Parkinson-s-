@@ -163,21 +163,21 @@ public class User {
 //        return tremordata;
 //    }
 
-    void testUsers() {
-        User user = new User();
-        user.setEmail("testuser");
-        user.setBirthdate("12/32/43");
-        user.setIsDoctor(true);
-        user.setName("test name");
-        HashMap<String, Drug> meds = new HashMap<>();
-        meds.put("heroin", new Drug("take dieaily", "you may die", "1234", "3456"));
-        meds.put("cocaine", new Drug("take daildsafsday", "you mfdsafdsay die", "1234", "3456"));
-        user.setMedications(meds);
-        user.setWeight("fat as shit");
-        ArrayList<String> patients = new ArrayList<>();
-        patients.add("pat1");
-        patients.add("pat2");
-        user.setPatientIDs(patients);
-        TulypApplication.mFirebase.setNewUserInfo(user);
-    }
+//    void testUsers() {
+//        User user = new User();
+//        user.setEmail("testuser");
+//        user.setBirthdate("12/32/43");
+//        user.setIsDoctor(true);
+//        user.setName("test name");
+//        HashMap<String, Drug> meds = new HashMap<>();
+//        meds.put("heroin", new Drug("take dieaily", "you may die", "1234", "3456"));
+//        meds.put("cocaine", new Drug("take daildsafsday", "you mfdsafdsay die", "1234", "3456"));
+//        user.setMedications(meds);
+//        user.setWeight("fat as shit");
+//        ArrayList<String> patients = new ArrayList<>();
+//        patients.add("pat1");
+//        patients.add("pat2");
+//        user.setPatientIDs(patients);
+//        TulypApplication.mFirebase.setNewUserInfo(user);
+//    }
 }
