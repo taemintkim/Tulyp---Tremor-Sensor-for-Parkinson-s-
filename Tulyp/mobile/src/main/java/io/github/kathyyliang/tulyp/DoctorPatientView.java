@@ -33,7 +33,6 @@ public class DoctorPatientView extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
     }
-
     /**
      * @param uid
      */

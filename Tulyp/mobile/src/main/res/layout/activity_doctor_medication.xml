@@ -31,40 +31,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editMedication"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dosage"
             android:id="@+id/dosage"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editDosage"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Warnings"
             android:id="@+id/warnings"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editWarnings"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="First Day of Use"
             android:id="@+id/firstDay"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -72,14 +72,14 @@
             android:inputType="date"
             android:ems="10"
             android:id="@+id/editFirstDay"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Last Day of Use"
             android:id="@+id/lastDay"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -87,7 +87,7 @@
             android:inputType="date"
             android:ems="10"
             android:id="@+id/editLastDay"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="5dp" />
 
         <Button
             android:layout_width="match_parent"
@@ -95,8 +95,7 @@
             android:text="Save"
             android:id="@+id/saveMedication"
             android:layout_marginTop="20dp"
-            android:textColor="#ffffff"
-            android:onClick="updateMedicationView"/>
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </RelativeLayout>

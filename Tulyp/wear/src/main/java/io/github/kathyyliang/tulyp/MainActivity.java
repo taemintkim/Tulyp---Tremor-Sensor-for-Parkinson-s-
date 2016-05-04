@@ -40,24 +40,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        /*int notificationId = 001;
-
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.redtulipsmall)
-                        .setContentTitle("Tulyp")
-                        .setContentText("is now running in the background.");
-
-        // Get an instance of the NotificationManager service
-        NotificationManagerCompat notificationManager =
-                NotificationManagerCompat.from(this);
-
-        // Build the notification and issues it with notification manager.
-        notificationManager.notify(notificationId, notificationBuilder.build());
-
-        ((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
-                .notify(notificationId, notificationBuilder.build());*/
-
     }
 
     @Override

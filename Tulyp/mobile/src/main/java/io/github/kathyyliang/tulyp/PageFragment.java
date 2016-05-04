@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Set;
 
 
 /**
@@ -76,6 +77,8 @@ public class PageFragment extends Fragment {
         yAxis = chart.getAxisLeft();
         chart.getAxisRight().setEnabled(false);
         if (mPage == 1) {
+//            ArrayList<String> patients = TulypApplication.mUser.getPatientIDs();
+
             pullSensorData(myFirebase.getUID()); //getting today's data.
 //            LineData data = getData(24, 600);
 //            chart.setData(data);
@@ -89,7 +92,7 @@ public class PageFragment extends Fragment {
             // day
 
         } else if (mPage == 2) {
-            LineData data = getData(7, 600);
+            LineData data = getData(7, 2);
             chart.setData(data);
             xAxis.setLabelsToSkip(0);
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -101,7 +104,7 @@ public class PageFragment extends Fragment {
             // week
 
         } else if (mPage == 3) {
-            LineData data = getData(30, 600);
+            LineData data = getData(30, 3);
             chart.setData(data);
             xAxis.setLabelsToSkip(2);
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -113,7 +116,7 @@ public class PageFragment extends Fragment {
             // month
 
         } else if (mPage == 4) {
-            LineData data = getData(12, 600);
+            LineData data = getData(12, 4);
             chart.setData(data);
             xAxis.setLabelsToSkip(0);
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -132,19 +135,25 @@ public class PageFragment extends Fragment {
         return view;
     }
 
-    private LineData getData(int count, float range) {
+
+    private LineData getData(int count, int mPage) {
 
         ArrayList<String> xVals = new ArrayList<String>();
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         float[] arr = {200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320,
                 200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320,
                 200, 300, 250, 233, 400, 500, 450, 460, 380, 410, 350, 320};
-        if (count == 24) {
+        if (mPage == 1) {
             arr = todaysYData;
         }
         for (int i = 0; i < count; i++) {
-            xVals.add(Integer.toString(i + 1));
+            xVals.add(Integer.toString(i));
             yVals.add(new Entry(arr[i], i));
+        }
+        if (mPage == 1) {
+            for (int i = count; i < 24; i++) {
+                xVals.add(Integer.toString(i));
+            }
         }
 
         // create a dataset and give it a type
@@ -192,7 +201,7 @@ public class PageFragment extends Fragment {
                 if (todaysYData == null) {
                     todaysYData = new float[24];
                 }
-                LineData data1 = getData(24, 600);
+                LineData data1 = getData(getCurrentHour() + 1, 1);
                 chart.setData(data1);
                 xAxis.setLabelsToSkip(1);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
