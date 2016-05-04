@@ -1,5 +1,6 @@
 package io.github.kathyyliang.tulyp;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -27,9 +28,11 @@ public class DoctorPatientView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Medical Data");
         setSupportActionBar(toolbar);
+        Intent intent = getIntent();
+        patientID = intent.getStringExtra("patientID");
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager(), DoctorPatientView.this));
+        viewPager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager(), DoctorPatientView.this, patientID));
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);

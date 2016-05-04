@@ -13,10 +13,12 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 4;
     private String tabTitles[] = new String[] { "Day", "Week", "Month", "Year" };
     private Context context;
+    private String patientID;
 
-    public TabFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public TabFragmentPagerAdapter(FragmentManager fm, Context context, String patientID) {
         super(fm);
         this.context = context;
+        this.patientID = patientID;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return PageFragment.newInstance(position + 1);
+        return PageFragment.newInstance(position + 1, patientID);
     }
 
     @Override

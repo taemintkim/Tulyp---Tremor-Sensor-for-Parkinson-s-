@@ -40,6 +40,7 @@ public class PageFragment extends Fragment {
     private MyFirebase myFirebase = TulypApplication.mFirebase;
     private float[] todaysYData;
 
+
     public static final String ARG_PAGE = "ARG_PAGE";
     XAxis xAxis;
     YAxis yAxis;
@@ -47,16 +48,19 @@ public class PageFragment extends Fragment {
     TextView label;
 
     private int mPage;
+    private String mID;
 
     public PageFragment() {
         // Required empty public constructor
     }
 
-    public static PageFragment newInstance(int page) {
+    public static PageFragment newInstance(int page, String patientID) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
+        args.putString("patientID", patientID);
         PageFragment fragment = new PageFragment();
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -64,6 +68,7 @@ public class PageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
+        mID = getArguments().getString("patientID");
     }
 
     @Override
@@ -79,7 +84,7 @@ public class PageFragment extends Fragment {
         if (mPage == 1) {
 //            ArrayList<String> patients = TulypApplication.mUser.getPatientIDs();
 
-            pullSensorData(myFirebase.getUID()); //getting today's data.
+            pullSensorData(mID); //getting today's data.
 //            LineData data = getData(24, 600);
 //            chart.setData(data);
 //            xAxis.setLabelsToSkip(1);

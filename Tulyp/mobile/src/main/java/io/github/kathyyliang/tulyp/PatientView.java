@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 public class PatientView extends AppCompatActivity {
 
+    private MyFirebase myFirebase = TulypApplication.mFirebase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class PatientView extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager(), PatientView.this));
+        viewPager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager(), PatientView.this, myFirebase.getUID()));
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
