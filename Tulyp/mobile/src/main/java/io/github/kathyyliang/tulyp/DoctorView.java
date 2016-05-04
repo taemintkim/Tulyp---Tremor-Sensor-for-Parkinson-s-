@@ -75,7 +75,7 @@ public class DoctorView extends AppCompatActivity {
                     for (User u : patients) {
                         names.add(u.getName());
                         age.add(u.getBirthdate());
-                        
+
                         medication.add((String) u.getMedications().keySet().toArray()[0]);
                     }
 
