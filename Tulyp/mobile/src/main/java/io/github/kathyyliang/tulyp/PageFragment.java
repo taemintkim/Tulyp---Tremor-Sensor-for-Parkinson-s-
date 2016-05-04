@@ -56,6 +56,7 @@ public class PageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_page, container, false);
         LineChart chart = (LineChart) view.findViewById(R.id.chart);
+        TextView label = (TextView) view.findViewById(R.id.xaxislabel);
         XAxis xAxis = chart.getXAxis();
         YAxis yAxis = chart.getAxisLeft();
         chart.getAxisRight().setEnabled(false);
@@ -80,11 +81,10 @@ public class PageFragment extends Fragment {
             yAxis.setDrawGridLines(false);
             chart.setDescription("");
             chart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
-            TextView label = (TextView) view.findViewById(R.id.xaxislabel);
             label.setText("Months");
-            LimitLine ll = new LimitLine(5, "Sinemet");
-            ll.setTextSize(10f);
-            xAxis.addLimitLine(ll);
+            //LimitLine ll = new LimitLine(5, "Sinemet");
+            //ll.setTextSize(10f);
+            //xAxis.addLimitLine(ll);
 
             // year
 

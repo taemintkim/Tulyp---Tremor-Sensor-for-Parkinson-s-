@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
@@ -52,6 +53,8 @@ public class JoinNow extends AppCompatActivity {
                 });
             }
         });
+
+        TextView signIn = (TextView) findViewById(R.id.signinlink);
 
     }
 
