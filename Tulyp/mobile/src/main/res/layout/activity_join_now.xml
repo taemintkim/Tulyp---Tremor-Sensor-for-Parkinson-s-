@@ -45,11 +45,11 @@
         android:text="Join Now"
         android:id="@+id/joinnowbutton"
         android:backgroundTint="@color/colorPrimary"
-        android:alpha="0.75"
         android:layout_below="@+id/joinnowpassword"
         android:layout_marginTop="30dp"
         android:layout_alignEnd="@+id/joinnowpassword"
-        android:layout_alignStart="@+id/joinnowpassword" />
+        android:layout_alignStart="@+id/joinnowpassword"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,6 +67,7 @@
         android:id="@+id/signinlink"
         android:layout_below="@+id/signinquestion"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

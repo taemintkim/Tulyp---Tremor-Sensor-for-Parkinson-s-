@@ -7,10 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.AuthData;
@@ -73,5 +76,25 @@ public class SignIn extends AppCompatActivity {
 
             }
         });
+
+        TextView joinNow = (TextView) findViewById(R.id.joinnowlink);
+        String text = (String) joinNow.getText();
+        SpannableString spannableString = new SpannableString(text);
+        spannableString.setSpan(new UnderlineSpan(), 0, text.length(), 0);
+        joinNow.setText(spannableString);
+
+        joinNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), JoinNow.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView forgotPassword = (TextView) findViewById(R.id.forgotpassword);
+        String str = (String) forgotPassword.getText();
+        SpannableString sStr = new SpannableString(str);
+        sStr.setSpan(new UnderlineSpan(), 0, str.length(), 0);
+        forgotPassword.setText(sStr);
     }
 }

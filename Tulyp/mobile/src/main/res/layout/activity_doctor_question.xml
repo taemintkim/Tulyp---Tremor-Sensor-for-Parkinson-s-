@@ -46,8 +46,8 @@
             android:layout_column="0"
             android:layout_gravity="fill"
             android:layout_columnWeight="1"
-            android:alpha="0.75"
-            android:layout_width="wrap_content" />
+            android:layout_width="wrap_content"
+            android:textColor="#ffffff" />
 
         <Button
             android:layout_height="wrap_content"
@@ -57,8 +57,8 @@
             android:layout_column="1"
             android:layout_gravity="fill"
             android:layout_columnWeight="1"
-            android:alpha="0.75"
-            android:layout_width="wrap_content" />
+            android:layout_width="wrap_content"
+            android:textColor="#ffffff" />
     </GridLayout>
 
 </RelativeLayout>
