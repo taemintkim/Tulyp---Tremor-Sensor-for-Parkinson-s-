@@ -2,6 +2,7 @@ package io.github.kathyyliang.tulyp;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
@@ -19,7 +21,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-//todo: There are a lot of buttons that do nothing!
 public class SignIn extends AppCompatActivity {
     private Context context;
     private MyFirebase mfirebase = TulypApplication.mFirebase;
@@ -68,7 +69,6 @@ public class SignIn extends AppCompatActivity {
                             });
                         } else {
                             // user is not logged in
-                            //TODO: kick off user and go back to register activity
                         }
                     }
                 });
@@ -95,7 +95,30 @@ public class SignIn extends AppCompatActivity {
         SpannableString sStr = new SpannableString(str);
         sStr.setSpan(new UnderlineSpan(), 0, str.length(), 0);
         forgotPassword.setText(sStr);
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText inputemail = new EditText(context);
+                new AlertDialog.Builder(context)
+                        .setTitle("Reset your password")
+                        .setMessage("Enter your email to receive a link to reset your password.")
+                        .setView(inputemail)
+                        .setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                resetPassword(inputemail.getText().toString());
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        })
+                        .show();
+            }
+        });
+
     }
+
 
     private void login(String email, String password) {
         mfirebase.getFirebaseRef().authWithPassword(email, password, new Firebase.AuthResultHandler() {
@@ -116,7 +139,6 @@ public class SignIn extends AppCompatActivity {
                 // there was an error
                 switch (error.getCode()) {
                     case FirebaseError.USER_DOES_NOT_EXIST:
-                        // todo handle a non existing user. Show alert dialog? This is up to Frontend
                         new AlertDialog.Builder(context)
                                 .setMessage("Woops! An account under this email does not exist.\nCheck your email address or sign up to Tulyp.")
                                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -147,16 +169,16 @@ public class SignIn extends AppCompatActivity {
         mfirebase.getFirebaseRef().resetPassword(email, new Firebase.ResultHandler() {
             @Override
             public void onSuccess() {
-                // password reset email sent
-                new AlertDialog.Builder(context)
-                        .setMessage("Check your email to reset your password.")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                CharSequence text = "Email Sent!";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration); //not sure if this way of passing in context is correct.
+                toast.show();
             }
 
             @Override
             public void onError(FirebaseError firebaseError) {
                 // error encountered
+                Log.d("Sign in", "forgot password error: " + firebaseError);
                 new AlertDialog.Builder(context)
                         .setMessage("Something went wrong. Try again.")
                         .setIcon(android.R.drawable.ic_dialog_alert)

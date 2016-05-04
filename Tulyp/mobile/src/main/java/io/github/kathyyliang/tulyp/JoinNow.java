@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 
-//todo: what if email and password are empty?
 public class JoinNow extends AppCompatActivity {
     private int counter = 0; //to make sure this activity only triggers next activity once.
 
