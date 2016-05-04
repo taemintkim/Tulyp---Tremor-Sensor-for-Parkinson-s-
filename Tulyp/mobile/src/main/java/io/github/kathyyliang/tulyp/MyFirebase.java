@@ -203,7 +203,7 @@ public class MyFirebase {
      * Save sensor data to Firebase.
      * @param data feel free to change this fit your need.
      */
-    public void pushSensorData(HashMap<String, Object> data) {
+    public void pushSensorData(Map<String, Object> data) {
         if (data == null) {
             Log.d("Firebase", "Trying to pass a null object");
             return;

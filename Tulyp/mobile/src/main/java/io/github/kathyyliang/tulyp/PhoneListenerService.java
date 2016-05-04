@@ -1,6 +1,5 @@
 package io.github.kathyyliang.tulyp;
 
-import android.content.Intent;
 import android.util.Log;
 
 import com.google.android.gms.common.data.FreezableUtils;
@@ -11,12 +10,15 @@ import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PhoneListenerService extends WearableListenerService {
 
     private final static String TREMOR_DATA_PATH = "/tremor_data_point";
     private final static String TREMOR_DATA = "tremor_data";
+    private MyFirebase firebaseClient = TulypApplication.mFirebase;
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {}
@@ -29,7 +31,17 @@ public class PhoneListenerService extends WearableListenerService {
             if (event.getType() == DataEvent.TYPE_CHANGED && event.getDataItem().getUri().getPath().equals(TREMOR_DATA_PATH)) {
                 DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
                 DataMap repData = dataMapItem.getDataMap().getDataMap(TREMOR_DATA);
-                System.out.println(repData.toString());
+
+                // keys: [time, speed, diffTime]
+                Map<String, String> sensorData = new HashMap<>();
+                sensorData.put("speed", String.valueOf(repData.getFloat("speed")));
+                sensorData.put("diffTime", String.valueOf(repData.getLong("diffTime")));
+
+                String timeKey = String.valueOf(repData.getLong("time"));
+                Map<String, Object> wrapper = new HashMap<>();
+                wrapper.put(timeKey, sensorData);
+
+                firebaseClient.pushSensorData(wrapper);
             }
         }
     }

@@ -90,7 +90,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                     Bundle b = new Bundle();
                     b.putLong("time", curTime);
                     b.putFloat("speed", speed);
-                    b.putFloat("diffTime", diffTime);
+                    b.putLong("diffTime", diffTime);
 
                     Bundle toSend = new Bundle();
                     toSend.putBundle(WatchToPhoneService.MESSAGE_KEY, b);
