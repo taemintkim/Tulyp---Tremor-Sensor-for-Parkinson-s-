@@ -205,7 +205,7 @@ public class MyFirebase {
      */
     public void pushSensorData(HashMap<String, Object> data) {
         if (data == null) {
-            Log.d("Firebase", "Trying to set a null user");
+            Log.d("Firebase", "Trying to pass a null object");
             return;
         }
         AuthData authData = mfirebase.getAuth();
@@ -215,5 +215,24 @@ public class MyFirebase {
         } else {
             Log.d("Firebase", "Not authenticated");
         }
+    }
+
+    /**
+     *
+     * @param uid
+     */
+    private void pullSensorData(String uid) {
+        Firebase userRef = mfirebase.child("SensorData").child(uid);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                HashMap<String, Object> data = (HashMap<String, Object>) snapshot.getValue();
+                TulypApplication.setTremordata(data);
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d("Firebase", "Failed to retrieve sensor data\n" + firebaseError);
+            }
+        });
     }
 }
