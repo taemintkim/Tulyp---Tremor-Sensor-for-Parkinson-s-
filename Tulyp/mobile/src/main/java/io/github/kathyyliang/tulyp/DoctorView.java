@@ -39,11 +39,13 @@ public class DoctorView extends AppCompatActivity {
 
         // check if we have data.
         if (mUser == null) {
-            //todo load user data from online
+            mfirebase.fetchUserData();
             Log.d("DoctorView", "No User data loaded.");
         }
         patientIDs = mUser.getPatientIDs();
-        fetchPatientsData(patientIDs);
+        if (patientIDs != null) {
+            fetchPatientsData(patientIDs);
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Patients");
