@@ -25,6 +25,11 @@ public class MedicalProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_profile);
         context = this;
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Medical Profile");
+        setSupportActionBar(toolbar);
+
         EditText fullName = (EditText) findViewById(R.id.fullname);
         EditText dateOfBirth = (EditText) findViewById(R.id.dateofbirth);
         EditText feet = (EditText) findViewById(R.id.feet);

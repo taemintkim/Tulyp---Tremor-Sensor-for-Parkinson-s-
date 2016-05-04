@@ -74,13 +74,29 @@
             android:id="@+id/editFirstDay"
             android:layout_marginTop="20dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Day of Use"
+            android:id="@+id/lastDay"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/editLastDay"
+            android:layout_marginTop="20dp" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Save"
             android:id="@+id/saveMedication"
             android:layout_marginTop="20dp"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:onClick="updateMedicationView"/>
     </LinearLayout>
 
 </RelativeLayout>

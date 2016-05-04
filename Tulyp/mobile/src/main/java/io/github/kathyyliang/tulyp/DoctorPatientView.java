@@ -18,7 +18,6 @@ public class DoctorPatientView extends AppCompatActivity {
     private double[] todaysYData;
     private MyFirebase myFirebase = TulypApplication.mFirebase;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,7 @@ public class DoctorPatientView extends AppCompatActivity {
     /**
      * @param uid
      */
-    public void pullSensorData(String uid) {
+    /*public void pullSensorData(String uid) {
         todaysYData = new double[24];
         Firebase mfirebase = myFirebase.getFirebaseRef();
         Firebase userRef = mfirebase.child("SensorData").child(uid);
@@ -62,5 +61,5 @@ public class DoctorPatientView extends AppCompatActivity {
                 Log.d("Firebase", "Failed to retrieve sensor data\n" + firebaseError);
             }
         });
-    }
+    }*/
 }

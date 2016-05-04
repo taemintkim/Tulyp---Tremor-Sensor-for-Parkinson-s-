@@ -226,7 +226,7 @@ public class MyFirebase {
      * @param tremordata
      * @return Map with hour as key, averaged tremor data for the hour as value.
      */
-    public static double[] makeDayDataPoints(Map<String, Object> tremordata) {
+    public static float[] makeDayDataPoints(Map<String, Object> tremordata) {
         long curTime = System.currentTimeMillis();
         Calendar curDate = Calendar.getInstance();
         curDate.setTimeInMillis(curTime);
@@ -263,7 +263,7 @@ public class MyFirebase {
                 break;
             }
         }
-        double[] result = new double[24];
+        float[] result = new float[24];
         Integer[] hkeys = hourlyData.keySet().toArray(new Integer[hourlyData.size()]);
         for (Integer key : hkeys) {
             ArrayList<Double> lst = hourlyData.get(key);
@@ -271,7 +271,7 @@ public class MyFirebase {
             for (Double x : lst) {
                 sum += x;
             }
-            result[key] = sum/lst.size();
+            result[key] = (float) (sum/lst.size());
         }
         return result;
     }

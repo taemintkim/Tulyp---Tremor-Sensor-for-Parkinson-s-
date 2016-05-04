@@ -34,6 +34,8 @@ public class PatientSettings extends AppCompatActivity {
                 } else if (text.equalsIgnoreCase("Account")) {
                     Intent intent = new Intent(getBaseContext(), AccountInfo.class);
                     startActivity(intent);
+                } else if (text.equalsIgnoreCase("Log Out")) {
+                    logout();
                 }
             }
         });
