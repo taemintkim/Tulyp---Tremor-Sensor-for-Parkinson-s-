@@ -28,6 +28,7 @@ public class DoctorView extends AppCompatActivity {
     ArrayList<String> names = new ArrayList<String>();
     ArrayList<String> medication = new ArrayList<String>();
     ArrayList<String> age = new ArrayList<String>();
+    ArrayList<String> patientIDs = new ArrayList<>();
 
 
     @Override
@@ -40,16 +41,8 @@ public class DoctorView extends AppCompatActivity {
             //todo load user data from online
             Log.d("DoctorView", "No User data loaded.");
         }
-        ArrayList<String> patientIDs = mUser.getPatientIDs();
+        patientIDs = mUser.getPatientIDs();
         fetchPatientsData(patientIDs);
-
-
-
-        final ListView patientList = (android.widget.ListView) findViewById(R.id.patientList);
-
-        final PatientArrayAdapter adapter = new PatientArrayAdapter(this, names, medication, patientIDs, age);
-        patientList.setAdapter(adapter);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Patients");
@@ -79,20 +72,28 @@ public class DoctorView extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     patients.add(snapshot.getValue(User.class));
+                    for (User u : patients) {
+                        names.add(u.getName());
+                        age.add(u.getBirthdate());
+                        
+                        medication.add((String) u.getMedications().keySet().toArray()[0]);
+                    }
 
-                    //todo: update View to show patient information
+                    updatePatientList();
                 }
+
                 @Override
                 public void onCancelled(FirebaseError firebaseError) {
                     Log.d("DoctorView", "Failed to retrieve User data\n" + firebaseError);
                 }
             });
         }
-        for (User u: patients) {
-            names.add(u.getName());
-//            medication.add();
-            age.add(u.getBirthdate());
-        }
+    }
+
+    private void updatePatientList() {
+        final ListView patientList = (android.widget.ListView) findViewById(R.id.patientList);
+        final PatientArrayAdapter adapter = new PatientArrayAdapter(this, names, medication, patientIDs, age);
+        patientList.setAdapter(adapter);
     }
 
     @Override
