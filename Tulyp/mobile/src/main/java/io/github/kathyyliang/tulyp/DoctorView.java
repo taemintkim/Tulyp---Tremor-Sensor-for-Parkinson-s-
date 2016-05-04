@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
@@ -23,7 +24,12 @@ import java.util.HashMap;
 public class DoctorView extends AppCompatActivity {
     MyFirebase mfirebase = TulypApplication.mFirebase;
     User mUser = TulypApplication.mUser;
-    ArrayList<User> patients = TulypApplication.patients;
+
+    ArrayList<User> patients = new ArrayList<>();
+    ArrayList<String> names = new ArrayList<String>();
+    ArrayList<String> medication = new ArrayList<String>();
+    ArrayList<String> age = new ArrayList<String>();
+    ArrayList<String> patientIDs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +41,7 @@ public class DoctorView extends AppCompatActivity {
             //todo load user data from online
             Log.d("DoctorView", "No User data loaded.");
         }
-        ArrayList<String> patientIDs = mUser.getPatientIDs();
+        patientIDs = mUser.getPatientIDs();
         fetchPatientsData(patientIDs);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -50,6 +56,7 @@ public class DoctorView extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     /**
@@ -65,14 +72,28 @@ public class DoctorView extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     patients.add(snapshot.getValue(User.class));
-                    //todo: update View to show patient information
+                    for (User u : patients) {
+                        names.add(u.getName());
+                        age.add(u.getBirthdate());
+                        
+                        medication.add((String) u.getMedications().keySet().toArray()[0]);
+                    }
+
+                    updatePatientList();
                 }
+
                 @Override
                 public void onCancelled(FirebaseError firebaseError) {
                     Log.d("DoctorView", "Failed to retrieve User data\n" + firebaseError);
                 }
             });
         }
+    }
+
+    private void updatePatientList() {
+        final ListView patientList = (android.widget.ListView) findViewById(R.id.patientList);
+        final PatientArrayAdapter adapter = new PatientArrayAdapter(this, names, medication, patientIDs, age);
+        patientList.setAdapter(adapter);
     }
 
     @Override

@@ -30,10 +30,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm"
-        android:id="@+id/button"
+        android:id="@+id/add_patient_button"
         android:layout_below="@+id/editText"
         android:layout_marginTop="30dp"
         android:layout_alignEnd="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_alignStart="@+id/editText"
+        android:onClick="addPatientView"/>
 
 </RelativeLayout>

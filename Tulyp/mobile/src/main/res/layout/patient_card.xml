@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:layout_centerHorizontal="true">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/name"
+    android:text= "Joanna Hansen"
+    android:textSize="24dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginTop="15dp"
+    android:textColor="#4a4c61"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/name"
+        android:id="@+id/age"
+        android:text="55"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@id/name"
+        android:layout_marginLeft="15dp"
+        android:textSize="20dp"
+        android:textColor="#4a4c61"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/medicationHeading"
+        android:text="Current Medication: "
+        android:layout_below="@id/name"
+        android:layout_alignLeft="@id/name"
+        android:layout_marginTop="5dp"
+        android:textSize="18dp"
+        android:textColor="#4a4c61"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/medication"
+        android:layout_toRightOf="@id/medicationHeading"
+        android:text="Sinemet"
+        android:layout_alignBaseline="@id/medicationHeading"
+        android:textSize="18dp"
+        android:textColor="#4a4c61"
+        android:layout_marginLeft="5dp"
+        />
+    <View
+        android:id = "@+id/line"
+        android:layout_below="@id/medicationHeading"
+        android:layout_width="345dp"
+        android:layout_marginLeft="18dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/darker_gray"/>
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/medicalprofilebutton"
+        android:layout_below="@id/line"
+        android:layout_marginLeft="14dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="Medical Profile"
+        android:textAllCaps="false"
+        android:textColor="#FFB292"
+        android:textSize="18dp"
+        android:layout_marginTop="2dp"
+        />
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/moredatabutton"
+        android:layout_below="@id/line"
+        android:layout_toRightOf="@id/medicalprofilebutton"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="More Data"
+        android:textAllCaps="false"
+        android:textColor="#FFB292"
+        android:textSize="18dp"
+        android:layout_marginTop="2dp"/>
+</RelativeLayout>

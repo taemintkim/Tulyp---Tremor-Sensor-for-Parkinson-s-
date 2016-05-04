@@ -13,11 +13,64 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <ListView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/accountinfo"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/email"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Email"
         android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/currentpassword"
+        android:hint="Password"
+        android:layout_below="@+id/email"
+        android:layout_marginTop="20dp"
+        android:layout_alignStart="@+id/email"
+        android:layout_alignEnd="@+id/email" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/newpassword"
+        android:hint="New Password"
+        android:layout_below="@+id/currentpassword"
+        android:layout_alignEnd="@+id/currentpassword"
+        android:layout_alignStart="@+id/currentpassword"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/confirmnewpassword"
+        android:hint="Confirm New Password"
+        android:layout_below="@+id/newpassword"
+        android:layout_alignStart="@+id/newpassword"
+        android:layout_alignEnd="@+id/newpassword"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Save"
+        android:id="@+id/savebutton"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/confirmnewpassword"
+        android:layout_alignStart="@+id/confirmnewpassword"
+        android:layout_alignEnd="@+id/confirmnewpassword"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>
