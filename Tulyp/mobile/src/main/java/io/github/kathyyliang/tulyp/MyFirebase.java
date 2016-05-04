@@ -161,6 +161,7 @@ public class MyFirebase {
         }
         if (uid != null) {
             Firebase userRef = mfirebase.child("Users").child(uid);
+            userRef.setValue("test");
             userRef.setValue(user);
         }
     }

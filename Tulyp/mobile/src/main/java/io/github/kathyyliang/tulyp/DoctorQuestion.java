@@ -38,20 +38,4 @@ public class DoctorQuestion extends AppCompatActivity {
         });
     }
 
-    void testUsers() {
-        User user = new User();
-        user.setEmail("testuser");
-        user.setBirthdate("12/32/43");
-        user.setIsDoctor(true);
-        user.setName("test name");
-        HashMap<String, Drug> meds = new HashMap<>();
-        meds.put("heroin", new Drug("take daily", "you may die", "1234", "3456"));
-        meds.put("cocaine", new Drug("take daildsafsday", "you mfdsafdsay die", "1234", "3456"));
-        user.setMedications(meds);
-        user.setWeight("fat as shit");
-        ArrayList<User> patients = new ArrayList<>();
-        patients.add(new User("pat1"));
-        patients.add(new User("pat2"));
-    }
-
 }
