@@ -21,6 +21,7 @@ import java.util.Map;
 
 //todo: what if email and password are empty?
 public class JoinNow extends AppCompatActivity {
+    private int counter = 0; //to make sure this activity only triggers next activity once.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class JoinNow extends AppCompatActivity {
         joinNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter = 0;
                 MyFirebase mfirebase = TulypApplication.mFirebase;
                 EditText email = (EditText) findViewById(R.id.joinnowemail);
                 EditText password = (EditText) findViewById(R.id.joinnowpassword);
@@ -43,10 +45,11 @@ public class JoinNow extends AppCompatActivity {
                     @Override
                     public void onAuthStateChanged(AuthData authData) {
                         MyFirebase mfirebase = TulypApplication.mFirebase;
-                        if (authData != null) {
+                        if (authData != null && counter < 1) {
                             EditText email = (EditText) findViewById(R.id.joinnowemail);
                             String uid = authData.getUid();
                             Log.d("##UID JOINNOW##", uid);
+                            counter++;
                             TulypApplication.mFirebase.setNewUserInfo(TulypApplication.mUser);
                             Intent intent = new Intent(getBaseContext(), DoctorQuestion.class);
                             startActivity(intent);

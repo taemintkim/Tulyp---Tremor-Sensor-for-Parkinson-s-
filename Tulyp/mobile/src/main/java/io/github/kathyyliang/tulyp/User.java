@@ -22,9 +22,9 @@ public class User {
     private Bitmap profilepic;
     private String phonenumber;
     private boolean isDoctor;
-    private String gender;
+    private int gender;
     private String weight;
-    private String height;
+    private ArrayList<String> height;
     private HashMap<String, Drug> medications;
     private String tremordata;
     private ArrayList<User> patients;
@@ -127,11 +127,11 @@ public class User {
         this.profilepic = profilepic;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -143,11 +143,11 @@ public class User {
         this.weight = weight;
     }
 
-    public String getHeight() {
+    public ArrayList<String> getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(ArrayList<String> height) {
         this.height = height;
     }
 
